@@ -4,9 +4,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#161A30",
-        secondary: '#31304D',
-        tertiary: 'B6BBC4',
+        primary: "#080912",
+        // secondary: '#161A30',
+        secondary: "#0e0f1a",
+        tertiary: '#B6BBC4',
         textColor: '#F0ECE5' 
       },
       fontFamily: {
