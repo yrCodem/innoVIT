@@ -1,8 +1,21 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [],
+  content: ["./src/**/*.{html,jsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#161A30",
+        secondary: '#31304D',
+        tertiary: 'B6BBC4',
+        textColor: '#F0ECE5' 
+      },
+      fontFamily: {
+        sora: ['Sora', 'sans-serif'],
+        'source-code-pro': ['"Source Code Pro"', 'monospace'],
+        'space-grotesk': ['"Space Grotesk"', 'sans-serif'],
+      },
+
+    },
   },
   plugins: [],
 }
