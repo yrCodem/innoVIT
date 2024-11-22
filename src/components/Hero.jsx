@@ -3,7 +3,7 @@ import React from 'react'
 const Hero = () => {
   return (
     <div>
-      This is Hero Page
+      <h1 className='text-center text-[3rem]'>This is Hero Page</h1>
     </div>
   )
 }

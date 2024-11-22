@@ -11,11 +11,6 @@ body {
   background-color: #080912
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
 
 .hide-scrollbar {
   scrollbar-width: none;
