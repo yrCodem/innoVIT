@@ -1,6 +1,4 @@
 import React from "react";
-import OS from "./content/OS.jsx";
-import Dbms from "./content/Dbms.jsx";
 import { Link, Outlet } from "react-router-dom";
 
 const Study = () => {
