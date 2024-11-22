@@ -1,7 +1,5 @@
 import React from "react";
-import OS from "./content/OS.jsx";
-import Dbms from "./content/Dbms.jsx";
-import { Link, Routes, Route } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 const Study = () => {
   return (
@@ -20,49 +18,44 @@ const Study = () => {
         </div>
         <ul className="flex flex-col">
           <li className="w-fill h-[40px] bg-secondary hover:bg-gray-800  flex flex-row items-center ml-2 mr-2 mt-2 rounded-lg">
-            
-          <svg
-                className="text-textColor group-hover:text-primary"
-                xmlns="http://www.w3.org/2000/svg"
-                height="20px"
-                viewBox="0 -960 960 960"
-                width="20px"
-                fill="currentColor"
-              >
-                <path d="M490-480 301-669l83-83 272 272-272 272-83-83 189-189Z" />
-              </svg>
-            
+            <svg
+              className="text-textColor group-hover:text-primary"
+              xmlns="http://www.w3.org/2000/svg"
+              height="20px"
+              viewBox="0 -960 960 960"
+              width="20px"
+              fill="currentColor"
+            >
+              <path d="M490-480 301-669l83-83 272 272-272 272-83-83 189-189Z" />
+            </svg>
+
             <Link to="OS" className="w-full h-full flex items-center px-2 mr-2">
               Operating System
             </Link>
           </li>
           <li className="w-fill h-[40px] bg-secondary hover:bg-gray-800 flex items-center ml-2 mr-2 mt-2 rounded-lg">
-            
             <svg
-                className="text-textColor group-hover:text-primary"
-                xmlns="http://www.w3.org/2000/svg"
-                height="20px"
-                viewBox="0 -960 960 960"
-                width="20px"
-                fill="currentColor"
-              >
-                <path d="M490-480 301-669l83-83 272 272-272 272-83-83 189-189Z" />
-              </svg>
-            
-            <Link to="Dbms" className="w-full h-full flex items-center px-2 mr-2 overflow-hidden ">
-              Database Management System 
+              className="text-textColor group-hover:text-primary"
+              xmlns="http://www.w3.org/2000/svg"
+              height="20px"
+              viewBox="0 -960 960 960"
+              width="20px"
+              fill="currentColor"
+            >
+              <path d="M490-480 301-669l83-83 272 272-272 272-83-83 189-189Z" />
+            </svg>
+
+            <Link
+              to="Dbms"
+              className="w-full h-full flex items-center px-2 mr-2 overflow-hidden "
+            >
+              Database Management System
             </Link>
           </li>
         </ul>
       </div>
       <div className="study-content-wrapper w-full h-[86vh] bg-secondary rounded-[20px] ml-2 mr-2 mb-2 overflow-x-hidden overflow-y-scroll hide-scrollbar p-8">
-        {/* <OS/> */}
-        {/* <Dbms/> */}
-        {/* render here using link */}
-        <Routes>
-          <Route path="os" element={<OS />} />
-          <Route path="dbms" element={<Dbms />} />
-        </Routes>
+        <Outlet />
       </div>
     </div>
   );
