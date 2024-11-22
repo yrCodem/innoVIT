@@ -7,6 +7,9 @@ const Header = () => {
       <div className="header-left text-textColor ml-8">
         <Link to="/" className="flex items-center">
           <h1 className="text-3xl tracking-wider">innoVIT</h1>
+          {/* <div>
+          <img className="h-64 border " src="src/assets/innovit.png" alt="" />
+          </div> */}
         </Link>
       </div>
       <div className="header-right">
