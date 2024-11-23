@@ -6,6 +6,7 @@ import UniCollab from "./components/UniCollab.jsx";
 import OS from "./components/content/OS.jsx"; 
 import Default from './components/content/OpenFile.jsx'
 import Dbms from "./components/content/Dbms.jsx"; 
+import Linux from './components/content/Linux.jsx'
 import { Routes, Route } from "react-router-dom";
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
           <Route index element={<Default/>} />
           <Route path="OS" element={<OS />} />
           <Route path="Dbms" element={<Dbms />} />
+          <Route path="Linux" element={<Linux />} />
         </Route>
       </Routes>
     </div>

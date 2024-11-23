@@ -6,10 +6,8 @@ const Header = () => {
     <div className="header flex justify-between items-center max-w-[100vw] h-[12vh] bg-primary font-sora font-black">
       <div className="header-left text-textColor ml-8">
         <Link to="/" className="flex items-center">
-          <h1 className="text-3xl tracking-wider">innoVIT</h1>
-          {/* <div>
-          <img className="h-64 border " src="src/assets/innovit.png" alt="" />
-          </div> */}
+          {/* <h1 className="text-3xl tracking-wider">innoVIT</h1> */}
+          <img className="w-44 " src="../src/assets/innovit.png" alt="InnoVIT" />
         </Link>
       </div>
       <div className="header-right">
