@@ -3,11 +3,9 @@ import Hero from "./components/Hero.jsx";
 import Login from "./components/Login.jsx";
 import Study from "./components/Study.jsx";
 import UniCollab from "./components/UniCollab.jsx";
-import OS from "./components/content/OS.jsx"; 
-import Default from './components/content/OpenFile.jsx'
-import Dbms from "./components/content/Dbms.jsx"; 
-import Linux from './components/content/Linux.jsx'
+import Default from './components/StudyDefault.jsx'
 import { Routes, Route } from "react-router-dom";
+import SubjectDetails from './components/SubjectDetails.jsx'
 
 const App = () => {
   return (
@@ -20,9 +18,7 @@ const App = () => {
         <Route path="/unicollab" element={<UniCollab />} />
         <Route path="study" element={<Study />}>
           <Route index element={<Default/>} />
-          <Route path="OS" element={<OS />} />
-          <Route path="Dbms" element={<Dbms />} />
-          <Route path="Linux" element={<Linux />} />
+          <Route path=":subjectName" element={<SubjectDetails />} />
         </Route>
       </Routes>
     </div>
