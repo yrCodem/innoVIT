@@ -33,14 +33,15 @@ const SubjectDetails = () => {
   }
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold">{subject.mainTitle}</h1>
+    <div className="flex flex-col">
+      <h1 className="text-[3rem] font-bold mb-2">{subject.mainTitle}</h1>
+      <span className="w-[90%] h-[1px] bg-gray-600 mb-4"></span>
       {subject.sections.map((section, index) => (
         <div key={index}>
-          <h2 className="text-2xl font-semibold mt-4">{section.heading}</h2>
-          <p className="mt-2">{section.content}</p>
+          <h2 className="text-[2rem] font-bold tracking-widest mb-4">{section.heading}</h2>
+          <p className="tracking-wide ml-16 mb-4">{section.content}</p>
           {section.listItems.length > 0 && (
-            <ul className="list-disc ml-6 mt-2">
+            <ul className="list-disc tracking-wide ml-16 mb-4">
               {section.listItems.map((item, idx) => (
                 <li key={idx}>{item}</li>
               ))}
