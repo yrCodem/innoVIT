@@ -34,7 +34,7 @@ const Study = () => {
           <input
             type="text"
             className="w-full mt-2 p-[5px] rounded-md bg-[#1a1c2b] focus:outline-none mb-[1.2rem]"
-            placeholder="Search Cources by Course Code"
+            placeholder="Search Courses by Course Code"
           />
           <span className="min-w-[90%] border-b-[1px] border-gray-600 "></span>
         </div>
