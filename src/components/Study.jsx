@@ -65,9 +65,7 @@ const Study = () => {
           ))}
         </ul>
       </div>
-      <div className="study-content-wrapper w-full h-[86vh] bg-secondary rounded-[20px] ml-2 mr-2 mb-2 overflow-x-hidden overflow-y-scroll hide-scrollbar p-8">
-        <Outlet />
-      </div>
+          <Outlet />
     </div>
   );
 };
