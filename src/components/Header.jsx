@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { SignInButton } from "@clerk/clerk-react";
 
 const Header = () => {
   return (
@@ -79,7 +80,8 @@ const Header = () => {
               >
                 <path d="M490-480 301-669l83-83 272 272-272 272-83-83 189-189Z" />
               </svg>
-              <span className="ml-1">Get Started</span>
+              <span className="ml-1 group-hover:hidden">Get Started</span>
+              <span className="ml-1 relative invisible group-hover:visible"><SignInButton /></span>
             </Link>
           </li>
         </ul>
