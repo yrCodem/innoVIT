@@ -4,21 +4,39 @@ import { motion } from 'framer-motion';
 
 const faqs = [
   {
-    question: 'How do I join the community platform?',
-    answer: 'Registration is open to all current students and faculty members. Simply use your college email address to sign up and follow the verification process.',
+    question: 'What is innoVIT?',
+    answer: 'innoVIT is a digital platform for VIT Bhopal students and faculty, offering academic resources, real-time discussion forums, and collaboration tools to enhance learning and teamwork',
+  },
+  {
+    question: 'What services does innoVIT offer?',
+    answer: [
+      "The platform offers a comprehensive suite of features to support academic success. Discussion forums, course resources, and collaboration tools facilitate instant communication, teamwork, and access to study materials. Progress tracking enables students to monitor their progress, stay motivated, and adjust their learning strategies accordingly.",
+    ],
+  },
+  {
+    question: 'What are the core features of innoVIT?',
+    answer: 'The platform features a user-friendly interface, real-time forums and collaboration tools, and centralized course resources. Personalized dashboards and notifications help students stay organized, track progress, and receive timely updates, creating a seamless learning environment.',
+  },
+  {
+    question: 'How does innoVIT benefit users?',
+    answer: "The platform benefits both students and faculty, providing students with quick doubt resolution, easy access to materials, and teamwork support, while enabling faculty to share resources, engage with students, and guide discussions, fostering a collaborative and supportive learning environment."
+  },
+  {
+    question: 'Why is innoVIT unique?',
+    answer: "It’s tailored for VIT Bhopal, combining academic support, resources, and collaboration in a single platform.",
   },
   {
     question: 'What are the community guidelines?',
     answer: 'Our community follows strict guidelines promoting respectful communication, academic integrity, and collaborative learning. Full guidelines are provided upon registration.',
   },
-  {
-    question: 'What technical requirements are needed?',
-    answer: 'The platform is web-based and works on all modern browsers. We recommend using Chrome, Firefox, or Safari for the best experience.',
-  },
-  {
-    question: 'How can I get technical support?',
-    answer: 'Technical support is available 24/7 through our help desk. You can also access our comprehensive FAQ section or contact support@college.edu.',
-  },
+  // {
+  //   question: 'What technical requirements are needed?',
+  //   answer: 'The platform is web-based and works on all modern browsers. We recommend using Chrome, Firefox, or Safari for the best experience.',
+  // },
+  // {
+  //   question: 'How can I get technical support?',
+  //   answer: 'Technical support is available 24/7 through our help desk. You can also access our comprehensive FAQ section or contact support@college.edu.',
+  // },
 ];
 
 const FAQ = () => {
