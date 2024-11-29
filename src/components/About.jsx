@@ -36,16 +36,17 @@ const About = () => {
           <div className="bg-gray-50 p-8 rounded-lg">
             <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
             <p className="text-gray-600 mb-6">
-              To empower students with knowledge, skills, and values to excel in their chosen fields
-              and contribute meaningfully to society through innovation and leadership.
+            To empower students with the knowledge, skills, and values needed to excel in their chosen fields while fostering a culture of innovation, leadership, and social responsibility. We aim to shape global citizens who contribute meaningfully to the advancement of technology, sustainability, and society at large.
             </p>
             
             <h3 className="text-2xl font-bold text-gray-900 mb-4">Campus Highlights</h3>
             <ul className="text-left text-gray-600 list-disc list-inside">
-              <li>State-of-the-art research facilities</li>
-              <li>Modern library with extensive digital resources</li>
-              <li>Innovation hub and startup incubator</li>
-              <li>Sports complex and recreation centers</li>
+              <li>Advanced Research Facilities for hands-on learning and innovation</li>
+              <li>Extensive Digital Library for academic and research resources.</li>
+              <li>Startup Incubator to support entrepreneurial ventures and innovative projects.</li>
+              <li>Caltech-Inspired Curriculum emphasizing flexibility, interdisciplinary learning, and innovation.</li>
+              <li>Collaborative Learning Ecosystem with state-of-the-art labs and peer-driven projects.</li>
+              <li>Global Collaborations for research, exchange programs, and international exposure.</li>
             </ul>
           </div>
         </motion.div>

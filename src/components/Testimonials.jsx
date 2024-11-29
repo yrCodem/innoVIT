@@ -5,7 +5,7 @@ const testimonials = [
   {
     name: 'Umair Malik',
     role: 'Computer Science Student/Aspiring Developer',
-    image: "https://i.pravatar.cc/150?u=fake@pravatar.com",
+    image: "https://i.pravatar.cc/150?img=11",
     alt: 'https://ui-avatars.com/api/?name=Umair+Malik',
     quote: "I’m blown away by how easy it is to navigate innoVIT! It’s like having a mentor at my fingertips. Highly recommend!",
     rating: 5,
