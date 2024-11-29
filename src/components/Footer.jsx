@@ -54,7 +54,7 @@ const Footer = () => {
         
         <div className="border-t border-gray-800 pt-8 text-center">
           <p className="text-sm text-gray-400">
-            ©{new Date().getFullYear()} innoVIT Community Platform. All rights reserved.
+            ©{new Date().getFullYear()} innoVIT Community. All rights reserved.
           </p>
           <div className="mt-2">
             <a href="./PrivacyPolicy.jsx" className="text-sm text-gray-400 hover:text-primary mx-2">Privacy Policy</a>
