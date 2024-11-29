@@ -34,7 +34,7 @@ const FAQ = () => {
         >
           <h2 className="text-4xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Find answers to common questions about our community platform.
+            Find answers to common questions about our Community.
           </p>
         </motion.div>
 
