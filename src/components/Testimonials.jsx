@@ -3,17 +3,18 @@ import { motion } from 'framer-motion';
 
 const testimonials = [
   {
-    name: 'Sarah Johnson',
-    role: 'Computer Science Student',
-    image: 'https://ui-avatars.com/api/?name=Yash+Rawalkar',
+    name: 'Umair Malik',
+    role: 'Computer Science Student/Aspiring Developer',
+    image: "https://i.pravatar.cc/150?u=fake@pravatar.com",
+    alt: 'https://ui-avatars.com/api/?name=Umair+Malik',
     quote: "I’m blown away by how easy it is to navigate innoVIT! It’s like having a mentor at my fingertips. Highly recommend!",
     rating: 5,
   },
   {
-    name: 'Dr. Michael Chen',
+    name: 'Dr. Nitin Kumar Mishra',
     role: 'Professor of Engineering',
     image: 'https://i.pravatar.cc/150?img=2',
-    alt: "https://ui-avatars.com/api/?name=Yash+Rawalkar",
+    alt: "https://ui-avatars.com/api/?name=Nitin+Kumar+Mishra",
     quote: "As a faculty member, I've seen tremendous improvement in student engagement through this platform.",
     rating: 5,
   },
