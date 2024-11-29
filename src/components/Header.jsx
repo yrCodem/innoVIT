@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { SignInButton } from "@clerk/clerk-react";
+import { SignInButton, UserButton, useUser } from "@clerk/clerk-react";
 
 const Header = () => {
+  // const user = useUser();
   return (
     <div className="header flex justify-between items-center max-w-[100vw] h-[12vh] bg-primary font-sora font-black">
       <div className="header-left text-textColor ml-8">
@@ -80,10 +81,19 @@ const Header = () => {
               >
                 <path d="M490-480 301-669l83-83 272 272-272 272-83-83 189-189Z" />
               </svg>
-              <span className="ml-1 group-hover:hidden">Get Started</span>
+              <span className="ml-1 group-hover:hidden z-10">Get Started</span>
               <span className="ml-1 relative invisible group-hover:visible"><SignInButton /></span>
+              <UserButton />
             </Link>
           </li>
+          {/* const getUserButton = () => {
+            const user = getUser();
+            if (user) {
+              return <span className="ml-1 relative"><UserButton /></span>;
+            } else {
+            return <span className="ml-1 relative invisible group-hover:visible"><SignInButton /></span>;
+            }
+          }; */}
         </ul>
       </div>
     </div>

@@ -1,27 +1,29 @@
-import React, { useState } from 'react'
-
-const Hero = () => {
-
-  const [message, setMessage] = useState('');
-
-  const fetchMessage = async () => {
-    try{
-      const responce = await fetch('http://localhost:5000/')
-      const data = await responce.json()
-      setMessage(data.message)
-    } catch(error) {
-      console.error(error)
-      setMessage("error fetching message: "+ error)
-    }
-  }
-
+import React from 'react';
+import { motion } from 'framer-motion';
+// import Features from './Features'
+import { FaComments, FaShare, FaCalendar, FaUsers, FaGraduationCap } from 'react-icons/fa';
+import Homepage from './Homepage.jsx';
+import Features from './Features.jsx';
+import About from './About.jsx';
+import Testimonials from './Testimonials.jsx'
+import FAQ from './FAQ.jsx';
+import Footer from './Footer.jsx';
+import PrivacyPolicy from './PrivacyPolicy.jsx';
+import TermsOfService from './TermsOfService.jsx';
+function Hero() {
   return (
-    <div className='flex flex-col items-center'>
-      <h1 className='text-center text-[3rem]'>This is Hero Page</h1>
-      <button className='p-2 bg-gray-800 w-fit m-4 rounded' onClick={fetchMessage}>Click me to fetch data from backend</button>
-      <p className='p-8 bg-gray-800 w-fit m-4 rounded'>{message}</p>
+    <div className="min-h-screen bg-dark-bg text-white">
+      <Homepage/>
+      <Features/>
+      <About/>
+      <Testimonials/>
+      <FAQ/>
+      <Footer/>
+      {/* <TermsOfService/> */}
+      {/* <PrivacyPolicy/> */}
     </div>
-  )
-}
+  );
+}  
 
-export default Hero
+
+export default Hero;
