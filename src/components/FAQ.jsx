@@ -41,7 +41,7 @@ const faqs = [
 
 const FAQ = () => {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-primary">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -50,8 +50,8 @@ const FAQ = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <h2 className="text-4xl font-bold text-textColor mb-6">Frequently Asked Questions</h2>
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
             Find answers to common questions about our Community.
           </p>
         </motion.div>
@@ -64,12 +64,12 @@ const FAQ = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="mb-4"
+              className="mb-4 p-1 bg-secondary rounded-lg"
             >
               <Disclosure>
                 {({ open }) => (
                   <>
-                    <Disclosure.Button className="flex justify-between w-full px-6 py-4 text-left text-gray-900 bg-white rounded-lg hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-primary focus-visible:ring-opacity-75">
+                    <Disclosure.Button className="flex rounded-none justify-between w-full px-6 py-4 text-left text-textColor bg-secondary focus:outline-none focus-visible:ring focus-visible:ring-primary focus-visible:ring-opacity-75">
                       <span className="font-medium">{faq.question}</span>
                       <span className={`transform ${open ? 'rotate-180' : ''} transition-transform`}>
                         ▼
@@ -84,7 +84,7 @@ const FAQ = () => {
                       leaveFrom="transform scale-100 opacity-100"
                       leaveTo="transform scale-95 opacity-0"
                     >
-                      <Disclosure.Panel className="px-6 py-4 text-gray-600 bg-white rounded-b-lg">
+                      <Disclosure.Panel className="px-6 py-4 text-textColor0 bg-secondary rounded-none">
                         {faq.answer}
                       </Disclosure.Panel>
                     </Transition>

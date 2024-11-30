@@ -53,7 +53,7 @@ const Testimonials = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-primary">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -62,8 +62,8 @@ const Testimonials = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold text-gray-900 mb-6">Community Voices</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <h2 className="text-4xl font-bold text-textColor mb-6">Community Voices</h2>
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
             Hear from our students, faculty, and alumni about their experiences
             with our community platform.
           </p>
@@ -77,7 +77,7 @@ const Testimonials = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-gray-50 p-8 rounded-lg"
+              className="bg-secondary p-8 rounded-lg"
             >
               <img
                 src={testimonial.image}
@@ -89,8 +89,8 @@ const Testimonials = () => {
                   <span key={i}>★</span>
                 ))}
               </div>
-              <p className="text-gray-600 italic mb-4">"{testimonial.quote}"</p>
-              <h3 className="font-bold text-gray-900">{testimonial.name}</h3>
+              <p className="text-textColor italic mb-4">"{testimonial.quote}"</p>
+              <h3 className="font-bold text-gray-300">{testimonial.name}</h3>
               <p className="text-gray-500">{testimonial.role}</p>
             </motion.div>
           ))}

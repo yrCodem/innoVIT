@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.17.0",
+    "@clerk/elements": "^0.19.8",
+    "@clerk/themes": "^2.1.48",
     "@headlessui/react": "^2.2.0",
     "@multiavatar/multiavatar": "^1.0.7",
     "autoprefixer": "^10.4.20",
