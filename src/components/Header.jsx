@@ -1,19 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { SignInButton, UserButton, useUser } from "@clerk/clerk-react";
+import { div } from "motion/react-client";
 
 const Header = () => {
-  // const user = useUser();
+  const { isSignedIn, user } = useUser();
+
   return (
-    <div className="header flex justify-between items-center max-w-[100vw] h-[12vh] bg-primary font-sora font-black">
+    <div className="header fixed w-full z-50 flex justify-between items-center max-w-[100vw] h-[12vh] bg-primary font-sora font-black">
+      {/* Left Section: Logo */}
       <div className="header-left text-textColor ml-8">
         <Link to="/" className="flex items-center">
-          {/* <h1 className="text-3xl tracking-wider">innoVIT</h1> */}
-          <img className="w-44 " src="../src/assets/innovit.png" alt="InnoVIT" />
+          <img
+            className="w-44"
+            src="../src/assets/innovit.png"
+            alt="InnoVIT Logo"
+          />
         </Link>
       </div>
+
+      {/* Right Section: Navigation */}
       <div className="header-right">
         <ul className="list-none flex">
+          {/* Home Link */}
           <li
             className="mr-8 text-textColor flex items-center"
             id="header-links"
@@ -31,6 +40,8 @@ const Header = () => {
               <span className="ml-1">Home</span>
             </Link>
           </li>
+
+          {/* UniCollab Link */}
           <li
             className="mr-8 text-textColor flex items-center"
             id="header-links"
@@ -48,6 +59,8 @@ const Header = () => {
               <span className="ml-1">UniCollab</span>
             </Link>
           </li>
+
+          {/* Study Link */}
           <li
             className="mr-8 text-textColor flex items-center"
             id="header-links"
@@ -60,40 +73,35 @@ const Header = () => {
                 width="20px"
                 fill="#F0ECE5"
               >
-                <path d="M564-541v-76q31-10 64-14.5t68-4.5q23 0 46.5 2.5T792-626v74q-30-7-53-10t-43-3q-34 0-67 6t-65 18Zm0 236v-76q28-9 60-14.5t72-5.5q27 0 50.5 3t45.5 8v74q-30-7-53-10t-43-3q-34 0-67 6t-65 18Zm0-118v-76q32-10 65.5-15t66.5-5q27 0 50.5 3t45.5 8v74q-26-7-49.5-10t-46.5-3q-32 0-64.5 6T564-423ZM264-251q47 0 92 12t88 30v-454q-42-22-87-33t-93-11q-37 0-73.5 6.5T120-679v452q35-13 71-18.5t73-5.5Zm252 42q43-20 88-31t92-11q37 0 73.5 4.5T840-227v-452q-35-13-71-20.5t-73-7.5q-48 0-93 11t-87 33v454ZM483-70q-50-31-104-55t-115-24q-34.59 0-69.29 8Q160-133 127-120q-38 17-74-4.16T17-186v-502q0-28 13-51.2 13-23.2 37-34.8 47-19 95-27.5t98.89-8.5q59.11 0 114.61 13.5T480-753q51-28 105.5-42.5T699.11-810q50.89 0 98.89 8.5t95 27.5q24 11.6 37.5 34.8Q944-716 944-688v517q0 36-29.5 53.5T853-116q-38-16-77.21-24.5-39.2-8.5-79.79-8.5-59 0-111.5 24.5T483-70ZM283-458Z" />
+                <path d="M564-541v-76q31-10 64-14.5t68-4.5q23 0 46.5 2.5T792-626v74q-30-7-53-10t-43-3q-34 0-67 6t-65 18Zm0 236v-76q28-9 60-14.5t72-5.5q27 0 50.5 3t45.5 8v74q-30-7-53-10t-43-3q-34 0-67 6t-65 18Zm0-118v-76q32-10 65.5-15t66.5-5q27 0 50.5 3t45.5 8v74q-26-7-49.5-10t-46.5-3q-32 0-64.5 6T564-423ZM264-251q47 0 92 12t88 30v-454q-42-22-87-33t-93-11q-37 0-73.5 6.5T120-679v452q35-13 71-18.5t73-5.5Zm252 42q43-20 88-31t92-11q37 0 73.5 4.5T840-227v-452q-35-13-71-20.5t-73-7.5q-48 0-93 11t-87 33v454ZM483-70q-50-31-104-55t-115-24q-34.59 0-69.29 8Q160-133 127-120q-38 17-74-4.16T17-186v-502q0-28 13-51.2 13-23.2 37-34.8 47-19 95-27.5t98.89-8.5q59.11 0 114.61 13.5T480-753q51-28 105.5-42.5T699.11-810q50.89 0 98.89 8.5t95 27.5q24 11.6 37.5 34.8Q944-716 944-688v517q0 36-29.5 53.5T853-116q-38-16-77.21-24.5-39.2-8.5-79.79-8.5-62 0-116.5 23.5T483-70Z" />
               </svg>
               <span className="ml-1">Study</span>
             </Link>
           </li>
-          <li className="mr-8">
-            <Link
-              to="/login"
-              className="group p-3 border-[1.5px] rounded-full text-textColor bg-secondary hover:bg-textColor hover:text-primary flex items-center transition w-full h-full"
-              id="header-links"
-            >
-              <svg
-                className="text-textColor group-hover:text-primary"
-                xmlns="http://www.w3.org/2000/svg"
-                height="20px"
-                viewBox="0 -960 960 960"
-                width="20px"
-                fill="currentColor"
-              >
-                <path d="M490-480 301-669l83-83 272 272-272 272-83-83 189-189Z" />
-              </svg>
-              <span className="ml-1 group-hover:hidden z-10">Get Started</span>
-              <span className="ml-1 relative invisible group-hover:visible"><SignInButton /></span>
-              <UserButton />
-            </Link>
+
+          {/* User Section */}
+          <li className="mr-8 text-textColor flex items-center">
+            {isSignedIn ? (
+              <div className="flex items-center group p-1 border-[1.5px] rounded-full text-textColor bg-secondary transition w-full h-full">
+                <UserButton showName="true" />
+                
+              </div>
+            ) : (
+              <div className="flex items-center group p-1 pr-3 border-[1.5px] rounded-full text-textColor bg-secondary transition w-full h-full">
+                <svg
+                  className="text-textColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="20px"
+                  viewBox="0 -960 960 960"
+                  width="20px"
+                  fill="currentColor"
+                >
+                  <path d="M490-480 301-669l83-83 272 272-272 272-83-83 189-189Z" />
+                </svg>
+                <SignInButton />
+              </div>
+            )}
           </li>
-          {/* const getUserButton = () => {
-            const user = getUser();
-            if (user) {
-              return <span className="ml-1 relative"><UserButton /></span>;
-            } else {
-            return <span className="ml-1 relative invisible group-hover:visible"><SignInButton /></span>;
-            }
-          }; */}
         </ul>
       </div>
     </div>

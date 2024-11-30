@@ -3,7 +3,7 @@ import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white py-12">
+    <footer className="bg-secondary text-textColor py-12">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
@@ -29,14 +29,14 @@ const Footer = () => {
           <div className='col-span-2'>
             <h3 className="text-xl font-bold mb-4">Connect With Us</h3>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-primary"><FaFacebook size={24} /></a>
-              <a href="#" className="hover:text-primary"><FaTwitter size={24} /></a>
-              <a href="#" className="hover:text-primary"><FaLinkedin size={24} /></a>
-              <a href="#" className="hover:text-primary"><FaInstagram size={24} /></a>
+              <a href="#" className=""><FaFacebook size={24} /></a>
+              <a href="#" className=""><FaTwitter size={24} /></a>
+              <a href="#" className=""><FaLinkedin size={24} /></a>
+              <a href="#" className=""><FaInstagram size={24} /></a>
             </div>
           </div>
           
-          <div>
+          {/* <div>
             <h3 className="text-xl font-bold mb-4">Newsletter</h3>
             <p className="mb-4">Stay updated with our latest news and events.</p>
             <form className="flex flex-col space-y-2">
@@ -49,7 +49,7 @@ const Footer = () => {
                 Subscribe
               </button>
             </form>
-          </div>
+          </div> */}
         </div>
         
         <div className="border-t border-gray-800 pt-8 text-center">
@@ -57,8 +57,8 @@ const Footer = () => {
             ©{new Date().getFullYear()} innoVIT Community. All rights reserved.
           </p>
           <div className="mt-2">
-            <a href="./PrivacyPolicy.jsx" className="text-sm text-gray-400 hover:text-primary mx-2">Privacy Policy</a>
-            <a href="./TermsOfService.jsx" className="text-sm text-gray-400 hover:text-primary mx-2">Terms of Service</a>
+            <a href="./PrivacyPolicy.jsx" className="text-sm text-textColor mx-2">Privacy Policy</a>
+            <a href="./TermsOfService.jsx" className="text-sm text-textColor mx-2">Terms of Service</a>
           </div>
         </div>
       </div>

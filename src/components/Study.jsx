@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
+import { SignedIn, SignedOut, SignInButton } from "@clerk/clerk-react";
 import axios from "axios";
 
 const Study = () => {
@@ -25,7 +26,7 @@ const Study = () => {
   }
 
   return (
-    <div className="study-main-container flex overflow-x-hidden max-w-[100vw] font-sora">
+    <div className="study-main-container flex overflow-x-hidden max-w-[100vw] font-sora relative top-[13vh]">
       <div className="study-sidebar w-[20vw] min-w-[20rem] max-w-[20vw] h-[86vh] bg-secondary rounded-[20px] ml-2 mr-2 mb-2">
         <div className="study-sidebar-heading-wrapper m-2 overflow-x-hidden flex flex-col items-center ">
           <div className="w-full">
@@ -65,7 +66,31 @@ const Study = () => {
           ))}
         </ul>
       </div>
-          <Outlet />
+      <SignedIn>
+        <Outlet />
+      </SignedIn>
+      <SignedOut>
+        <div className="flex h-[86vh] min-h-[86vh] max-h-[86vh] w-full justify-center items-center flex-col">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="100px"
+            viewBox="0 -960 960 960"
+            width="100px"
+            fill="#F0ECE5"
+          >
+            <path d="M479.91-120q-28.91 0-49.41-20.59-20.5-20.59-20.5-49.5t20.59-49.41q20.59-20.5 49.5-20.5t49.41 20.59q20.5 20.59 20.5 49.5t-20.59 49.41q-20.59 20.5-49.5 20.5ZM410-360v-480h140v480H410Z" />
+          </svg>
+
+          <h3 className="w-[50%] text-[2rem] font-semibold tracking-wide mb-4 text-center">
+            <span className="font-black text-tertiary"> Oops! </span> Looks like
+            you're not signed in. Please sign up or log in to access this
+            feature!{" "}
+          </h3>
+          <div className="font-sora text-xl bg-textColor text-primary font-black p-4 pl-8 pr-8 rounded-full">
+            <SignInButton />
+          </div>
+        </div>
+      </SignedOut>
     </div>
   );
 };
