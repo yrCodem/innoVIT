@@ -12,8 +12,8 @@ const Footer = () => {
             <p className="mb-2">Bhopal-Indore Highway</p>
             <p className="mb-2">Kothrikalan, Sehore</p>
             <p className="mb-2">Madhya Pradesh – 466114</p>
-            <p className="mb-2">Phone: </p>
-            <p>Email: </p>
+            {/* <p className="mb-2">Phone: </p> */}
+            <p>Email: innovit.edu@gmail.com</p>
           </div>
           
           {/* <div>
