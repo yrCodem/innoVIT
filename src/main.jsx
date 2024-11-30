@@ -5,6 +5,7 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 import { ClerkProvider } from "@clerk/clerk-react";
+import { dark } from '@clerk/themes'
 import ReactDOM from "react-dom/client";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
@@ -30,12 +31,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             colorInputBackground: "#0e0f1a",
           },
 
-          elements: {
-            button: {
-              fontFamily: "Arial, sans-serif", // Custom font family
-              fontWeight: "bold", // Set font weight to bold globally
-            },
-          },
+          baseTheme: dark
         }}
       >
         <App />

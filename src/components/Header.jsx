@@ -84,21 +84,26 @@ const Header = () => {
             {isSignedIn ? (
               <div className="flex items-center group p-1 border-[1.5px] rounded-full text-textColor bg-secondary transition w-full h-full">
                 <UserButton showName="true" />
-                
               </div>
             ) : (
-              <div className="flex items-center group p-1 pr-3 border-[1.5px] rounded-full text-textColor bg-secondary transition w-full h-full">
-                <svg
-                  className="text-textColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="20px"
-                  viewBox="0 -960 960 960"
-                  width="20px"
-                  fill="currentColor"
+              <div >
+                <Link
+                  to="/sign-in"
+                  className="group p-3 border-[1.5px] rounded-full text-textColor bg-secondary hover:bg-textColor hover:text-primary flex items-center transition w-full h-full"
+                  id="header-links"
                 >
-                  <path d="M490-480 301-669l83-83 272 272-272 272-83-83 189-189Z" />
-                </svg>
-                <SignInButton />
+                  <svg
+                    className="text-textColor group-hover:text-primary"
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="20px"
+                    viewBox="0 -960 960 960"
+                    width="20px"
+                    fill="currentColor"
+                  >
+                    <path d="M490-480 301-669l83-83 272 272-272 272-83-83 189-189Z" />
+                  </svg>
+                  <span className="ml-1">Login / Signup</span>
+                </Link>
               </div>
             )}
           </li>

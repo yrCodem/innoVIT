@@ -1,13 +1,12 @@
-import { SignedIn, SignedOut, SignInButton } from "@clerk/clerk-react";
+import { SignedIn, SignedOut } from "@clerk/clerk-react";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const UniCollab = () => {
   return (
     <div className="max-w-[100vw] font-sora relative top-[13vh]">
       <SignedIn>
-        <div>
-          unicollab page
-        </div>
+        <div>unicollab page</div>
       </SignedIn>
 
       <SignedOut>
@@ -27,9 +26,11 @@ const UniCollab = () => {
             you're not signed in. Please sign up or log in to access this
             feature!{" "}
           </h3>
-          <div className="font-sora text-xl bg-textColor text-primary font-black p-4 pl-8 pr-8 rounded-full">
-            <SignInButton />
-          </div>
+          <Link to={"/sign-in"}>
+            <div className="font-sora text-xl bg-textColor text-primary font-black p-4 pl-8 pr-8 rounded-full">
+              Sign in
+            </div>
+          </Link>
         </div>
       </SignedOut>
     </div>

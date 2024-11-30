@@ -24,17 +24,22 @@ const Homepage = () => {
             A chance to learn, a place to grow.
           </p>
           <SignedOut>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="font-sora text-xl bg-textColor w-fit text-primary font-black p-4 pl-8 pr-8 rounded-full"
-            >
-              <SignInButton />
-            </motion.button>
+            <Link to={"/sign-in"}>
+              <div >
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="font-sora text-xl bg-textColor w-fit text-primary font-black p-4 pl-8 pr-8 rounded-full"
+                >Sign in</motion.button>
+              </div>
+            </Link>
           </SignedOut>
           <SignedIn>
             <div>
               <motion.button
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.2 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="font-sora text-xl bg-textColor w-fit text-primary font-black p-4 pl-8 pr-8 rounded-full mr-2 "
@@ -53,14 +58,14 @@ const Homepage = () => {
                 </Link>
               </motion.button>
               <motion.button
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.2 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="font-sora text-xl bg-textColor w-fit text-primary font-black p-4 pl-8 pr-8 rounded-full ml-2 "
               >
-                <Link
-                  to="/unicollab"
-                  className="flex items-center"
-                >
+                <Link to="/unicollab" className="flex items-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     height="20px"
@@ -83,12 +88,12 @@ const Homepage = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mt-16 relative"
         >
-          <div className="bg-gradient-to-b from-blue-500/10 to-transparent absolute inset-0 rounded-xl" />
+          {/* <div className="bg-gradient-to-b from-blue-500/10 to-transparent absolute inset-0 rounded-xl" />
           <img
             src="/platform-preview.png"
             alt="Platform Interface"
             className="w-full rounded-xl shadow-2xl"
-          />
+          /> */}
         </motion.div>
       </div>
     </section>
