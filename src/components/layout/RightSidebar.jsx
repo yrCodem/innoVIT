@@ -4,10 +4,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card.jsx'
 
 export default function RightSidebar() {
   return (
-    <div className='hidden xl:fixed xl:top-28 xl:right-0 xl:bottom-0 xl:z-50 xl:flex xl:w-80 xl:flex-col border-l'>
+    <div className='hidden xl:fixed xl:top-28 xl:right-0 xl:bottom-0 xl:z-50 xl:flex xl:w-80 xl:flex-col'>
       <div className='flex grow flex-col gap-y-5 overflow-y-auto bg-inherit px-6 py-4'>
         <div className='space-y-4'>
-          <Card>
+          <Card >
             <CardHeader>
               <CardTitle className='flex items-center gap-2 text-base'>
                 {/* <span role='img' aria-label='wave'>

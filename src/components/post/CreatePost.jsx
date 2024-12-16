@@ -2,11 +2,10 @@ import React, { useState } from 'react'
 import { Button } from '../ui/Button.jsx'
 import { Card, CardContent, CardFooter, CardHeader } from '../ui/Card.jsx'
 import { Textarea } from '../ui/TextArea.jsx'
-import { useUser } from '@clerk/clerk-react'
 
 const CreatePost = ({ onPostCreate }) => {
   const [content, setContent] = useState('')
-  const { user } = useUser()
+  const { user } =' useUser()'
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -15,8 +14,8 @@ const CreatePost = ({ onPostCreate }) => {
     const newPost = {
       id: Date.now(),
       content,
-      author: user.fullName,
-      authorId: user.id,
+      author: "user.fullName",
+      authorId: "user.id",
       createdAt: new Date().toISOString(),
       likes: 0,
       comments: [],

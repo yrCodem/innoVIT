@@ -26,5 +26,3 @@
 - Collaborative tools for peer-to-peer learning
 
 ## Benefit from our structured learning pathway and achieve academic excellence with VIT Bhopal's curated resources!
-
-@innoVIT

@@ -1,14 +1,8 @@
 import React from "react";
-import { motion } from "framer-motion";
 
 const OpenFile = () => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 100 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.2 }}
-      className="flex h-[86vh] min-h-[86vh] max-h-[86vh] w-full justify-center items-center flex-col"
-    >
+    <div className="flex h-[86vh] min-h-[86vh] max-h-[86vh] w-full justify-center items-center flex-col">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="100px"
@@ -21,7 +15,7 @@ const OpenFile = () => {
       <h3 className="w-[50%] text-[2rem] font-bold tracking-wide mb-4 text-center">
         Please select a subject from the sidebar to view its content.
       </h3>
-    </motion.div>
+    </div>
   );
 };
 
