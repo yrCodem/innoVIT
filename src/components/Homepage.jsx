@@ -1,11 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { SignedIn, SignedOut, SignInButton } from "@clerk/clerk-react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../utils/AuthContext.jsx";
 
 const Homepage = () => {
+  const { isAuthenticated } = useAuth();
+
   return (
-    <section className=" min-h-screen flex items-center justify-center overflow-hidden">
+    <section className=" min-h-screen flex items-center justify-center overflow-hidden ">
       <div className="glow top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
 
       <div className="container mx-auto px-4 pt-24 pb-20 relative z-10">
@@ -23,18 +25,20 @@ const Homepage = () => {
           <p className="text-xl text-gray-400 mb-12">
             A chance to learn, a place to grow.
           </p>
-          <SignedOut>
-            <Link to={"/sign-in"}>
-              <div >
+
+          {!isAuthenticated ? (
+            <Link to={"/login"}>
+              <div>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="font-sora text-xl bg-textColor w-fit text-primary font-black p-4 pl-8 pr-8 rounded-full"
-                >Sign in</motion.button>
+                >
+                  Sign in
+                </motion.button>
               </div>
             </Link>
-          </SignedOut>
-          <SignedIn>
+          ) : (
             <div>
               <motion.button
                 initial={{ opacity: 0, x: -50 }}
@@ -79,7 +83,7 @@ const Homepage = () => {
                 </Link>
               </motion.button>
             </div>
-          </SignedIn>
+          )}
         </motion.div>
 
         <motion.div

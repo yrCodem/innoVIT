@@ -3,13 +3,12 @@ import { Card, CardContent, CardFooter, CardHeader } from '../ui/Card.jsx'
 import { Button } from '../ui/Button.jsx'
 import { ThumbsUp, ThumbsDown, MessageCircle, Send } from 'lucide-react'
 import { Textarea } from '../ui/TextArea.jsx'
-import { useUser } from '@clerk/clerk-react'
 import Comment from './Comment.jsx'
 
 const Post = ({ post, onLike, onDislike, onComment }) => {
   const [isCommenting, setIsCommenting] = useState(false)
   const [commentText, setCommentText] = useState('')
-  const { user } = useUser()
+  const { user } = "useUser()"
 
   const handleCommentSubmit = e => {
     e.preventDefault()
@@ -18,8 +17,8 @@ const Post = ({ post, onLike, onDislike, onComment }) => {
     const newComment = {
       id: Date.now(),
       content: commentText,
-      author: user.fullName,
-      authorId: user.id,
+      author: "user.fullName",
+      authorId: "user.id",
       createdAt: new Date().toISOString(),
     }
 

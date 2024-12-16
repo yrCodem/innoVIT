@@ -32,9 +32,9 @@ const secondaryNav = [
 
 const Sidebar = () => {
   return (
-    <div className='hidden lg:fixed lg:top-28 lg:bottom-0 lg:z-50 lg:flex lg:w-72 lg:flex-col'>
-      <div className='flex grow flex-col gap-y-5 overflow-y-auto border-r bg-background px-6 pb-4'>
-        <nav className='flex flex-1 flex-col pt-4'>
+    <div className='hidden lg:fixed lg:top-[12vh] lg:bottom-0 lg:z-20 lg:flex lg:w-72 lg:flex-col bg-secondary m-2 rounded-2xl'>
+      <div className='flex grow flex-col gap-y-5 overflow-y-auto bg-background px-2'>
+        <nav className='flex flex-1 flex-col pt-4 '>
           <ul role='list' className='flex flex-1 flex-col gap-y-7'>
             <li>
               <ul role='list' className='-mx-2 space-y-1'>
@@ -42,7 +42,7 @@ const Sidebar = () => {
                   <li key={item.name}>
                     <Link
                       to={item.href}
-                      className='flex gap-x-3 rounded-md p-2 text-sm leading-6 text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+                      className='flex gap-x-3 rounded-md p-2 text-sm leading-6 text-muted-foreground hover:bg-gray-800 '
                     >
                       <item.icon className='h-5 w-5 shrink-0' />
                       {item.name}
@@ -60,7 +60,7 @@ const Sidebar = () => {
                   <li key={item.name}>
                     <Link
                       to={item.href}
-                      className='flex gap-x-3 rounded-md p-2 text-sm leading-6 text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+                      className='flex gap-x-3 rounded-md p-2 text-sm leading-6 text-muted-foreground hover:bg-gray-800'
                     >
                       <item.icon className='h-5 w-5 shrink-0' />
                       {item.name}

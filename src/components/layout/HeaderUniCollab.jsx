@@ -7,7 +7,7 @@ import { Input } from '../ui/Input.jsx'
 
 export default function Header() {
   return (
-    <header className='sticky top-0 z-50 w-full border-b backdrop-blur supports-[backdrop-filter]:bg-background/60'>
+    <header className='sticky top-0 z-20 w-full backdrop-blur supports-[backdrop-filter]:bg-background/60'>
       <div className='container flex h-20 items-center justify-center '>
         <div className='flex items-center gap-4 md:gap-8'>
           <Link href='/' className='flex items-center space-x-2'>
@@ -17,10 +17,10 @@ export default function Header() {
           </Link>
           <div className='hidden md:flex'>
             <div className='relative w-full'>
-              <Search className='absolute left-2 top-2.5 h-4 w-4 text-muted-foreground text-black' />
+              <Search className='absolute left-2 top-2.5 h-4 w-4 text-muted-foreground text-textColor' />
               <Input
                 placeholder='Search...'
-                className='w-[500px] pl-9 text-black'
+                className='w-[500px] pl-9 text-black bg-secondary border-0'
               />
             </div>
           </div>

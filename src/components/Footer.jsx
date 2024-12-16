@@ -12,19 +12,9 @@ const Footer = () => {
             <p className="mb-2">Bhopal-Indore Highway</p>
             <p className="mb-2">Kothrikalan, Sehore</p>
             <p className="mb-2">Madhya Pradesh – 466114</p>
-            {/* <p className="mb-2">Phone: </p> */}
-            <p>Email: innovit.edu@gmail.com</p>
+            <p className="mb-2">Phone: </p>
+            <p>Email: </p>
           </div>
-          
-          {/* <div>
-            <h3 className="text-xl font-bold mb-4">Quick Links</h3>
-            <ul>
-              <li className="mb-2"><a href="#" className="hover:text-primary">About Us</a></li>
-              <li className="mb-2"><a href="#" className="hover:text-primary">Programs</a></li>
-              <li className="mb-2"><a href="#" className="hover:text-primary">Events</a></li>
-              <li className="mb-2"><a href="#" className="hover:text-primary">Support</a></li>
-            </ul>
-          </div> */}
           
           <div className='col-span-2'>
             <h3 className="text-xl font-bold mb-4">Connect With Us</h3>
@@ -35,21 +25,6 @@ const Footer = () => {
               <a href="#" className=""><FaInstagram size={24} /></a>
             </div>
           </div>
-          
-          {/* <div>
-            <h3 className="text-xl font-bold mb-4">Newsletter</h3>
-            <p className="mb-4">Stay updated with our latest news and events.</p>
-            <form className="flex flex-col space-y-2">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="px-4 py-2 rounded bg-gray-800 text-white"
-              />
-              <button className="bg-primary hover:bg-blue-700 px-4 py-2 rounded transition-colors">
-                Subscribe
-              </button>
-            </form>
-          </div> */}
         </div>
         
         <div className="border-t border-gray-800 pt-8 text-center">

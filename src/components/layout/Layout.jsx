@@ -12,10 +12,10 @@ const Layout = ({ children }) => {
     //   <main>{children}</main>
     //   <Footer />
     // </div>
-    <div className='min-h-screen bg-inherit'>
+    <div className='min-h-[] bg-inherit'>
       {/* <Header /> */}
       <Sidebar />
-      <main className='lg:pl-72 xl:pr-80'>
+      <main className='lg:pl-72 xl:pr-80 '>
         <div className='px-4 py-4 sm:px-6 lg:px-8'>{children}</div>
       </main>
       <RightSidebar />
