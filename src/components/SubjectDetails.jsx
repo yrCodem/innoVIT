@@ -63,7 +63,7 @@ const SubjectDetails = () => {
 
   return (
     <div className='study-content-wrapper h-[86vh] min-h-[86vh] max-h-[86vh] w-full flex flex-col'>
-      <div className='w-full bg-secondary rounded-[20px] ml-2 mr-2 mb-2 min-h-fit  hide-scrollbar p-4 pl-8'>
+      <div className='w-full bg-secondary rounded-[20px] ml-2 mr-2 mb-2 min-h-fit hide-scrollbar p-4 pl-8'>
         <h1 className='text-[2rem] font-bold text-textColor'>
           {subject.mainTitle}
         </h1>
