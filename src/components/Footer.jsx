@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from 'react-icons/fa'
 
 const Footer = () => {
@@ -40,12 +41,9 @@ const Footer = () => {
             ©{new Date().getFullYear()} innoVIT Community. All rights reserved.
           </p>
           <div className='mt-2'>
-            <a
-              href='./PrivacyPolicy.jsx'
-              className='text-sm text-textColor mx-2'
-            >
+            <Link to='/testpage' className='text-sm text-textColor mx-2'>
               Privacy Policy
-            </a>
+            </Link>
             <a
               href='./TermsOfService.jsx'
               className='text-sm text-textColor mx-2'
