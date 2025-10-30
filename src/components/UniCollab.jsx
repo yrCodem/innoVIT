@@ -163,7 +163,7 @@ const UniCollab = () => {
                   <CardHeader className="flex flex-row items-center gap-4">
                     <div>
                       <h2 className="text-xl font-semibold">
-                        Welcome to UniCollab Community
+                        Welcome to UniCollab Community!
                       </h2>
                       <p className="text-sm text-muted-foreground">
                         UniCollab Community is a community where students help each other.
