@@ -177,7 +177,7 @@ const UniCollab = () => {
                   </CardContent>
                   <CardFooter>
                     <Button variant="outline" size="sm">
-                      Read more
+                      Read more....
                     </Button>
                   </CardFooter>
                 </Card>
