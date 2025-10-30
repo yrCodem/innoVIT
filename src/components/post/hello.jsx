@@ -1,11 +1,11 @@
-import {hello, hello2} from 'module'
-function hello() {
+// import {hello, hello2} from 'module'
+// function hello() {
 
-  return (
-    <div>
-      <p>hello </p>
-    </div>
-  )
-}
+//   return (
+//     <div>
+//       <p>hello </p>
+//     </div>
+//   )
+// }
 
-export default hello
+// export default hello
