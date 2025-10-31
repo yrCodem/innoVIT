@@ -33,7 +33,7 @@ const Sidebar = () => {
             <div className="space-y-2">
               <div className="flex items-center justify-between text-xs">
                 <span className="text-muted-foreground">Total Posts</span>
-                <span className="font-bold text-primary">0</span>
+                <span className="font-bold text-white">0</span>
               </div>
               <div className="flex items-center justify-between text-xs">
                 <span className="text-muted-foreground">Active Users</span>
@@ -45,7 +45,6 @@ const Sidebar = () => {
               </div>
             </div>
           </div>
-
           <div className='flex-1'>
             <ul className='space-y-1 text-sm'>
               <span className='font-semibold text-lg'>UniCollab++</span>
@@ -64,7 +63,7 @@ const Sidebar = () => {
               <li className='rounded-sm'>
                 <Link
                   to='/unicollab-plus'
-                  className='flex items-center p-2 space-x-3 rounded-md hover:bg-muted/50'
+                  className='flex items-center p-2 space-x-3 rounded-md hover:bg-gray-500'
                 >
                   <Users className="w-5 h-5 fill-current dark:text-gray-600" />
                   <span>UniCollab++</span>
@@ -75,7 +74,7 @@ const Sidebar = () => {
               <li className='rounded-sm'>
                 <Link
                   to='/tags'
-                  className='flex items-center p-2 space-x-3 rounded-md hover:bg-muted/50'
+                  className='flex items-center p-2 space-x-3 rounded-md hover:bg-gray-500'
                 >
                   <Tag className="w-5 h-5 fill-current dark:text-gray-600" />
                   <span>Tags</span>
@@ -86,7 +85,7 @@ const Sidebar = () => {
               <li className='rounded-sm'>
                 <Link
                   to='/help'
-                  className='flex items-center p-2 space-x-3 rounded-md hover:bg-muted/50'
+                  className='flex items-center p-2 space-x-3 rounded-md hover:bg-gray-500'
                 >
                   <HelpCircle className="w-5 h-5 fill-current dark:text-gray-600" />
                   <span>UniCollab Help</span>
@@ -97,7 +96,7 @@ const Sidebar = () => {
               <li className='rounded-sm'>
                 <Link
                   to='/challenges'
-                  className='flex items-center p-2 space-x-3 rounded-md hover:bg-muted/50'
+                  className='flex items-center p-2 space-x-3 rounded-md hover:bg-gray-500'
                 >
                   <Trophy className="w-5 h-5 fill-current dark:text-gray-600" />
                   <span>Challenges</span>
@@ -108,7 +107,7 @@ const Sidebar = () => {
               <li className='rounded-sm'>
                 <Link
                   to='/blog'
-                  className='flex items-center p-2 space-x-3 rounded-md hover:bg-muted/50'
+                  className='flex items-center p-2 space-x-3 rounded-md hover:bg-gray-500'
                 >
                   <BookOpen className="w-5 h-5 fill-current dark:text-gray-600" />
                   <span>UniCollab Blog</span>
@@ -116,25 +115,25 @@ const Sidebar = () => {
               </li>
 
               {/* Other Section */}
-              <li className='rounded-sm'>
+              {/* <li className='rounded-sm'>
                 <Link
                   to='/other'
-                  className='flex items-center p-2 space-x-3 rounded-md hover:bg-muted/50'
+                  className='flex items-center p-2 space-x-3 rounded-md hover:bg-gray-500'
                 >
                   <Info className="w-5 h-5 fill-current dark:text-gray-600" />
                   <span>Other</span>
                 </Link>
-              </li>
+              </li> */}
             </ul>
 
             {/* About Section */}
             <div className="mt-6">
-              <h3 className="font-semibold text-lg">About</h3>
+              <h3 className="font-semibold text-lg">About the Platform</h3>
               <ul className='space-y-1 text-sm'>
                 <li className='rounded-sm'>
                   <Link
                     to='/about'
-                    className='flex items-center p-2 space-x-3 rounded-md hover:bg-muted/50'
+                    className='flex items-center p-2 space-x-3 rounded-md hover:bg-gray-500'
                   >
                     <Info className="w-4 h-4 fill-current dark:text-gray-600" />
                     <span>About</span>
@@ -143,7 +142,7 @@ const Sidebar = () => {
                 <li className='rounded-sm'>
                   <Link
                     to='/guides'
-                    className='flex items-center p-2 space-x-3 rounded-md hover:bg-muted/50'
+                    className='flex items-center p-2 space-x-3 rounded-md hover:bg-gray-500'
                   >
                     <BookMarked className="w-4 h-4 fill-current dark:text-gray-600" />
                     <span>Guides</span>
@@ -151,8 +150,8 @@ const Sidebar = () => {
                 </li>
                 <li className='rounded-sm'>
                   <Link
-                    to='/code-of-conduct'
-                    className='flex items-center p-2 space-x-3 rounded-md hover:bg-muted/50'
+                    to='/src/components/code-of-conduct'
+                    className='flex items-center p-2 space-x-3 rounded-md hover:bg-gray-500'
                   >
                     <Shield className="w-4 h-4 fill-current dark:text-gray-600" />
                     <span>Code Of Conduct</span>
@@ -160,8 +159,8 @@ const Sidebar = () => {
                 </li>
                 <li className='rounded-sm'>
                   <Link
-                    to='/privacy'
-                    className='flex items-center p-2 space-x-3 rounded-md hover:bg-muted/50'
+                    to='/PrivacyPolicy'
+                    className='flex items-center p-2 space-x-3 rounded-md hover:bg-gray-500'
                   >
                     <FileText className="w-4 h-4 fill-current dark:text-gray-600" />
                     <span>Privacy Policy</span>
@@ -170,7 +169,7 @@ const Sidebar = () => {
                 <li className='rounded-sm'>
                   <Link
                     to='/terms'
-                    className='flex items-center p-2 space-x-3 rounded-md hover:bg-muted/50'
+                    className='flex items-center p-2 space-x-3 rounded-md hover:bg-gray-500/50'
                   >
                     <FileText className="w-4 h-4 fill-current dark:text-gray-600" />
                     <span>Terms of Service</span>
