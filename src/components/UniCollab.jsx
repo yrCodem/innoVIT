@@ -11,16 +11,8 @@ import { useAuth } from "../utils/AuthContext.jsx";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Home,
-  Users,
   MessageSquare,
-  Tag,
-  HelpCircle,
-  Trophy,
-  BookOpen,
-  Info,
-  BookMarked,
-  Shield,
-  FileText
+  Trophy
 } from 'lucide-react';
 
 const UniCollab = () => {
@@ -182,364 +174,159 @@ const UniCollab = () => {
     exit: { opacity: 0, y: -20 }
   };
 
-  const statCardVariants = {
-    initial: { opacity: 0, scale: 0.9 },
-    animate: { opacity: 1, scale: 1 },
-    hover: { scale: 1.02, transition: { duration: 0.2 } }
-  };
-
   return (
-    <div className="max-w-[100vw] font-sora relative top-[13vh]">
+    <div className="max-w-[100vw] font-sora">
       {isAuthenticated ? (
         <Layout>
           <HeaderUniCollab />
-          <div className="container mx-auto px-4 py-6">
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-              {/* Main Content */}
-              <div className="lg:col-span-3 space-y-6">
-                <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-                  <TabsList className="grid w-full grid-cols-3 p-1 bg-muted/50 rounded-lg">
-                    <TabsTrigger
-                      value="relevant"
-                      className="relative data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200"
-                    >
-                      <Home className="w-4 h-4 mr-2" />
-                      Relevant
-                    </TabsTrigger>
-                    <TabsTrigger
-                      value="latest"
-                      className="relative data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200"
-                    >
-                      <MessageSquare className="w-4 h-4 mr-2" />
-                      Latest
-                    </TabsTrigger>
-                    <TabsTrigger
-                      value="top"
-                      className="relative data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200"
-                    >
-                      <Trophy className="w-4 h-4 mr-2" />
-                      Top
-                    </TabsTrigger>
-                  </TabsList>
-
-                  <AnimatePresence mode="wait">
-                    <TabsContent value="relevant" className="space-y-6">
-                      <motion.div
-                        key="relevant"
-                        variants={tabContentVariants}
-                        initial="initial"
-                        animate="animate"
-                        exit="exit"
-                        transition={{ duration: 0.3 }}
-                      >
-                        <Card className="bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20">
-                          <CardHeader className="flex flex-row items-center gap-4">
-                            <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                              <BookOpen className="w-6 h-6 text-primary" />
-                            </div>
-                            <div>
-                              <h2 className="text-xl font-semibold">
-                                Welcome to UniCollab Community
-                              </h2>
-                              <p className="text-sm text-muted-foreground">
-                                Connect, collaborate, and grow with fellow students.
-                              </p>
-                            </div>
-                          </CardHeader>
-                          <CardContent>
-                            <p className="text-muted-foreground">
-                              Share your projects, ask questions, and help each other succeed in academic journey.
-                            </p>
-                          </CardContent>
-                          <CardFooter>
-                            <Button variant="outline" size="sm" className="gap-2">
-                              <BookMarked className="w-4 h-4" />
-                              Community Guidelines
-                            </Button>
-                          </CardFooter>
-                        </Card>
-
-                        <CreatePost onPostCreate={handleCreatePost} />
-
-                        <div className="space-y-4">
-                          {filteredPosts.map((post) => (
-                            <motion.div
-                              key={post.id}
-                              initial={{ opacity: 0, y: 20 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ duration: 0.3 }}
-                            >
-                              <Post
-                                post={post}
-                                onLike={handleLike}
-                                onDislike={handleDislike}
-                                onComment={handleComment}
-                                currentUser={currentUser}
-                              />
-                            </motion.div>
-                          ))}
-                        </div>
-                      </motion.div>
-                    </TabsContent>
-
-                    <TabsContent value="latest" className="space-y-6">
-                      <motion.div
-                        key="latest"
-                        variants={tabContentVariants}
-                        initial="initial"
-                        animate="animate"
-                        exit="exit"
-                        transition={{ duration: 0.3 }}
-                      >
-                        <div className="space-y-4">
-                          {filteredPosts.map((post) => (
-                            <motion.div
-                              key={post.id}
-                              initial={{ opacity: 0, x: -20 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ duration: 0.3 }}
-                            >
-                              <Post
-                                post={post}
-                                onLike={handleLike}
-                                onDislike={handleDislike}
-                                onComment={handleComment}
-                                currentUser={currentUser}
-                              />
-                            </motion.div>
-                          ))}
-                        </div>
-                      </motion.div>
-                    </TabsContent>
-
-                    <TabsContent value="top" className="space-y-6">
-                      <motion.div
-                        key="top"
-                        variants={tabContentVariants}
-                        initial="initial"
-                        animate="animate"
-                        exit="exit"
-                        transition={{ duration: 0.3 }}
-                      >
-                        <div className="space-y-4">
-                          {filteredPosts.map((post, index) => (
-                            <motion.div
-                              key={post.id}
-                              initial={{ opacity: 0, scale: 0.9 }}
-                              animate={{ opacity: 1, scale: 1 }}
-                              transition={{ duration: 0.3, delay: index * 0.1 }}
-                            >
-                              <Post
-                                post={post}
-                                onLike={handleLike}
-                                onDislike={handleDislike}
-                                onComment={handleComment}
-                                currentUser={currentUser}
-                              />
-                            </motion.div>
-                          ))}
-                        </div>
-                      </motion.div>
-                    </TabsContent>
-                  </AnimatePresence>
-                </Tabs>
-              </div>
-
-              {/* Dashboard Sidebar */}
-              <div className="lg:col-span-1 space-y-6">
-                {/* Community Stats */}
-                <motion.div
-                  initial="initial"
-                  animate="animate"
-                  variants={statCardVariants}
-                  transition={{ duration: 0.5 }}
+          <div className="space-y-6">
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+              <TabsList className="grid w-full grid-cols-3 p-1 bg-muted/50 rounded-lg">
+                <TabsTrigger
+                  value="relevant"
+                  className="relative data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200"
                 >
-                  <Card>
-                    <CardHeader>
-                      <h3 className="font-semibold flex items-center gap-2">
-                        <Home className="w-4 h-4" />
-                        Community Stats
-                      </h3>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div className="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
-                        <div className="flex items-center gap-2">
-                          <MessageSquare className="w-4 h-4 text-primary" />
-                          <span className="text-sm">Total Posts</span>
-                        </div>
-                        <span className="font-bold text-primary">{stats.totalPosts}</span>
-                      </div>
-
-                      <div className="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
-                        <div className="flex items-center gap-2">
-                          <Users className="w-4 h-4 text-green-500" />
-                          <span className="text-sm">Active Users</span>
-                        </div>
-                        <span className="font-bold text-green-500">{stats.activeUsers}</span>
-                      </div>
-
-                      <div className="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
-                        <div className="flex items-center gap-2">
-                          <MessageSquare className="w-4 h-4 text-blue-500" />
-                          <span className="text-sm">Total Comments</span>
-                        </div>
-                        <span className="font-bold text-blue-500">{stats.totalComments}</span>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-
-                {/* Dashboard Navigation Tabs */}
-                <motion.div
-                  initial="initial"
-                  animate="animate"
-                  variants={statCardVariants}
-                  transition={{ duration: 0.5, delay: 0.1 }}
+                  <Home className="w-4 h-4 mr-2" />
+                  Relevant
+                </TabsTrigger>
+                <TabsTrigger
+                  value="latest"
+                  className="relative data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200"
                 >
-                  <Card>
-                    <CardHeader>
-                      <h3 className="font-semibold">UniCollab++</h3>
-                    </CardHeader>
-                    <CardContent className="space-y-2">
-                      {/* Home Section */}
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-2 p-2 rounded-lg bg-muted/30">
-                          <Home className="w-4 h-4 text-primary" />
-                          <span className="text-sm font-medium">Home</span>
-                        </div>
-                      </div>
-
-                      {/* UniCollab++ Section */}
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-2 p-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-colors">
-                          <Users className="w-4 h-4" />
-                          <span className="text-sm">UniCollab++</span>
-                        </div>
-                      </div>
-
-                      {/* Tags Section */}
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-2 p-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-colors">
-                          <Tag className="w-4 h-4" />
-                          <span className="text-sm">Tags</span>
-                        </div>
-                      </div>
-
-                      {/* UniCollab Help Section */}
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-2 p-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-colors">
-                          <HelpCircle className="w-4 h-4" />
-                          <span className="text-sm">UniCollab Help</span>
-                        </div>
-                      </div>
-
-                      {/* Challenges Section */}
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-2 p-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-colors">
-                          <Trophy className="w-4 h-4" />
-                          <span className="text-sm">Challenges</span>
-                        </div>
-                      </div>
-
-                      {/* UniCollab Blog Section */}
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-2 p-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-colors">
-                          <BookOpen className="w-4 h-4" />
-                          <span className="text-sm">UniCollab Blog</span>
-                        </div>
-                      </div>
-
-                      {/* Other Section */}
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-2 p-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-colors">
-                          <Info className="w-4 h-4" />
-                          <span className="text-sm">Other</span>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-
-                {/* About Section */}
-                <motion.div
-                  initial="initial"
-                  animate="animate"
-                  variants={statCardVariants}
-                  transition={{ duration: 0.5, delay: 0.2 }}
+                  <MessageSquare className="w-4 h-4 mr-2" />
+                  Latest
+                </TabsTrigger>
+                <TabsTrigger
+                  value="top"
+                  className="relative data-[state=active]:bg-background data-[state=active]:shadow-sm transition-all duration-200"
                 >
-                  <Card>
-                    <CardHeader>
-                      <h3 className="font-semibold">About</h3>
-                    </CardHeader>
-                    <CardContent className="space-y-2">
-                      <div className="flex items-center gap-2 p-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-colors">
-                        <Info className="w-4 h-4" />
-                        <span className="text-sm">About</span>
-                      </div>
-                      <div className="flex items-center gap-2 p-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-colors">
-                        <BookMarked className="w-4 h-4" />
-                        <span className="text-sm">Guides</span>
-                      </div>
-                      <div className="flex items-center gap-2 p-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-colors">
-                        <Shield className="w-4 h-4" />
-                        <span className="text-sm">Code Of Conduct</span>
-                      </div>
-                      <div className="flex items-center gap-2 p-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-colors">
-                        <FileText className="w-4 h-4" />
-                        <span className="text-sm">Privacy Policy</span>
-                      </div>
-                      <div className="flex items-center gap-2 p-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-colors">
-                        <FileText className="w-4 h-4" />
-                        <span className="text-sm">Terms of Service</span>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+                  <Trophy className="w-4 h-4 mr-2" />
+                  Top
+                </TabsTrigger>
+              </TabsList>
 
-                {/* User Profile Card */}
-                {currentUser && (
+              <AnimatePresence mode="wait">
+                <TabsContent value="relevant" className="space-y-6">
                   <motion.div
+                    key="relevant"
+                    variants={tabContentVariants}
                     initial="initial"
                     animate="animate"
-                    variants={statCardVariants}
-                    transition={{ duration: 0.5, delay: 0.3 }}
+                    exit="exit"
+                    transition={{ duration: 0.3 }}
                   >
-                    <Card>
-                      <CardHeader>
-                        <h3 className="font-semibold">Your Profile</h3>
+                    <Card className="bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20">
+                      <CardHeader className="flex flex-row items-center gap-4">
+                        <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                          <Home className="w-6 h-6 text-primary" />
+                        </div>
+                        <div>
+                          <h2 className="text-xl font-semibold">
+                            Welcome to UniCollab Community
+                          </h2>
+                          <p className="text-sm text-muted-foreground">
+                            Connect, collaborate, and grow with fellow students.
+                          </p>
+                        </div>
                       </CardHeader>
-                      <CardContent className="space-y-3">
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-semibold">
-                            {currentUser.fullName?.charAt(0) || currentUser.username?.charAt(0) || 'U'}
-                          </div>
-                          <div>
-                            <p className="font-medium text-sm">
-                              {currentUser.fullName || currentUser.username || 'User'}
-                            </p>
-                            <p className="text-xs text-muted-foreground">
-                              Student Member
-                            </p>
-                          </div>
-                        </div>
-                        <div className="grid grid-cols-2 gap-2 text-center">
-                          <div className="p-2 bg-muted/30 rounded">
-                            <p className="font-bold text-sm">{posts.filter(p => p.authorId === currentUser.id).length}</p>
-                            <p className="text-xs text-muted-foreground">Posts</p>
-                          </div>
-                          <div className="p-2 bg-muted/30 rounded">
-                            <p className="font-bold text-sm">
-                              {posts.reduce((sum, post) => sum + (post.comments?.filter(c => c.authorId === currentUser.id).length || 0), 0)}
-                            </p>
-                            <p className="text-xs text-muted-foreground">Comments</p>
-                          </div>
-                        </div>
+                      <CardContent>
+                        <p className="text-muted-foreground">
+                          Share your projects, ask questions, and help each other succeed in academic journey.
+                        </p>
                       </CardContent>
+                      <CardFooter>
+                        <Button variant="outline" size="sm" className="gap-2">
+                          Community Guidelines
+                        </Button>
+                      </CardFooter>
                     </Card>
+
+                    <CreatePost onPostCreate={handleCreatePost} />
+
+                    <div className="space-y-4">
+                      {filteredPosts.map((post) => (
+                        <motion.div
+                          key={post.id}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <Post
+                            post={post}
+                            onLike={handleLike}
+                            onDislike={handleDislike}
+                            onComment={handleComment}
+                            currentUser={currentUser}
+                          />
+                        </motion.div>
+                      ))}
+                    </div>
                   </motion.div>
-                )}
-              </div>
-            </div>
+                </TabsContent>
+
+                <TabsContent value="latest" className="space-y-6">
+                  <motion.div
+                    key="latest"
+                    variants={tabContentVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    transition={{ duration: 0.3 }}
+                  >
+                    <CreatePost onPostCreate={handleCreatePost} />
+                    <div className="space-y-4">
+                      {filteredPosts.map((post) => (
+                        <motion.div
+                          key={post.id}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <Post
+                            post={post}
+                            onLike={handleLike}
+                            onDislike={handleDislike}
+                            onComment={handleComment}
+                            currentUser={currentUser}
+                          />
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                </TabsContent>
+
+                <TabsContent value="top" className="space-y-6">
+                  <motion.div
+                    key="top"
+                    variants={tabContentVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    transition={{ duration: 0.3 }}
+                  >
+                    <CreatePost onPostCreate={handleCreatePost} />
+                    <div className="space-y-4">
+                      {filteredPosts.map((post, index) => (
+                        <motion.div
+                          key={post.id}
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.3, delay: index * 0.1 }}
+                        >
+                          <Post
+                            post={post}
+                            onLike={handleLike}
+                            onDislike={handleDislike}
+                            onComment={handleComment}
+                            currentUser={currentUser}
+                          />
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                </TabsContent>
+              </AnimatePresence>
+            </Tabs>
           </div>
         </Layout>
       ) : (
