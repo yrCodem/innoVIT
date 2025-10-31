@@ -44,7 +44,7 @@ const Profile = () => {
   useEffect(() => {
     generateRandomAvatar();
     // Simulate fetching user email (replace with actual API call)
-    setProfileData(prev => ({ ...prev, email: "user@university.edu" }));
+    setProfileData(prev => ({ ...prev, email: "user.reg@vitbhopal.ac.in" }));
   }, [currentUser]);
 
   // Generate random avatar like Reddit
@@ -362,7 +362,7 @@ const Profile = () => {
                       value={profileData.currentPassword}
                       onChange={handleInputChange}
                       placeholder="Current password"
-                      className="w-full"
+                      className="w-full text-black"
                       required
                     />
                     <Input
@@ -371,7 +371,7 @@ const Profile = () => {
                       value={profileData.newPassword}
                       onChange={handleInputChange}
                       placeholder="New password"
-                      className="w-full"
+                      className="w-full text-black"
                       required
                     />
                     <Input
@@ -380,7 +380,7 @@ const Profile = () => {
                       value={profileData.confirmPassword}
                       onChange={handleInputChange}
                       placeholder="Confirm new password"
-                      className="w-full"
+                      className="w-full text-black"
                       required
                     />
                     <div className="flex gap-2">
@@ -444,7 +444,7 @@ const Profile = () => {
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="text-center p-4 bg-muted rounded-lg">
-                  <p className="text-2xl font-bold text-primary">0</p>
+                  <p className="text-2xl font-bold text-gray-500">0</p>
                   <p className="text-sm text-muted-foreground">Posts</p>
                 </div>
                 <div className="text-center p-4 bg-muted rounded-lg">
