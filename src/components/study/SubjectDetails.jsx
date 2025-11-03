@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
-import NotLoggedIn from './NotLoggedin.jsx'
+import NotLoggedIn from '../NotLoggedin.jsx'
 import axios from 'axios'
 
 const SubjectDetails = () => {

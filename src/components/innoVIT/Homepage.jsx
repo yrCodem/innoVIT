@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../utils/AuthContext.jsx'
+import { useAuth } from '../../utils/AuthContext.jsx'
 
 const Homepage = () => {
   const { isAuthenticated } = useAuth()
