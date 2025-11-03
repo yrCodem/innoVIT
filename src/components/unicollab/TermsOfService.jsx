@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import TermsContent from '../components/terms/TermsContent';
-import TermsHeader from '../components/terms/TermsHeader';
-import Layout from '../components/layout/Layout';
+import TermsContent from '../terms/TermsContent';
+import TermsHeader from '../terms/TermsHeader';
+import Layout from '../layout/Layout';
 
 const TermsOfService = () => {
   return (
