@@ -14,8 +14,8 @@ import {
   Lock,
   Globe
 } from 'lucide-react'
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card'
-import { Button } from '../ui/Button'
+import { Card, CardContent, CardHeader, CardTitle } from '../../ui/Card'
+import { Button } from '../../ui/Button'
 import { motion } from 'framer-motion'
 
 // Animation variants

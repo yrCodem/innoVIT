@@ -11,10 +11,10 @@ import axios from 'axios'
 
 import SubjectDetails from './components/SubjectDetails.jsx'
 import Profile from './components/Profile.jsx'
-import AboutCommunity from './components/unicollab/AboutCommunity.jsx'
-import CodeOfConduct from './components/unicollab/CodeOfConduct.jsx'
-import PrivacyPolicy from './components/unicollab/PrivacyPolicy.jsx'
-import TermsOfService from './components/unicollab/TermsOfService.jsx'
+import AboutCommunity from './components/unicollab/about-platform/AboutCommunity.jsx'
+import CodeOfConduct from './components/unicollab/about-platform/CodeOfConduct.jsx'
+import PrivacyPolicy from './components/unicollab/about-platform/PrivacyPolicy.jsx'
+import TermsOfService from './components/unicollab/about-platform/TermsOfService.jsx'
 
 const App = () => {
   const { login, logout, currentUser, isAuthenticated } = useAuth()
