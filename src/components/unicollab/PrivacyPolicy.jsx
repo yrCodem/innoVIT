@@ -1,18 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import {
-  FileText,
-  Scale,
-  UserCheck,
-  BookOpen,
   Shield,
-  AlertTriangle,
-  CheckCircle,
-  XCircle,
-  Users,
-  Globe,
   Lock,
+  Eye,
+  Database,
+  Users,
   Mail,
+  Cookie,
+  Server,
+  Globe,
+  FileText,
+  CheckCircle,
+  AlertTriangle,
   ArrowRight
 } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card'
@@ -78,104 +78,109 @@ const scaleUp = {
   }
 }
 
-const TermsOfService = () => {
-  const userResponsibilities = [
-    {
-      icon: UserCheck,
-      title: 'Account Security',
-      description: 'Maintain the confidentiality of your login credentials and promptly report any unauthorized access'
-    },
-    {
-      icon: BookOpen,
-      title: 'Academic Integrity',
-      description: 'Ensure all shared content respects academic honesty and properly cites sources'
-    },
+const PrivacyPolicy = () => {
+  const dataCollectionPoints = [
     {
       icon: Users,
-      title: 'Respectful Conduct',
-      description: 'Interact with all community members in a respectful and professional manner'
+      title: 'Account Information',
+      data: ['Username', 'Email address', 'Profile preferences', 'University affiliation']
     },
     {
-      icon: Shield,
-      title: 'Content Responsibility',
-      description: 'Take responsibility for the content you post and ensure it complies with our guidelines'
+      icon: FileText,
+      title: 'Academic Content',
+      data: ['Posts and discussions', 'Comments and replies', 'Study materials', 'Project collaborations']
+    },
+    {
+      icon: Globe,
+      title: 'Usage Data',
+      data: ['Browser type and version', 'IP address', 'Access times and dates', 'Pages visited']
+    },
+    {
+      icon: Cookie,
+      title: 'Technical Information',
+      data: ['Cookies and session data', 'Device information', 'Location data (approximate)', 'Preferences and settings']
     }
   ]
 
-  const allowedActivities = [
-    'Sharing educational resources and study materials',
-    'Collaborating on academic projects and assignments',
-    'Asking and answering academic questions',
-    'Forming study groups and discussion forums',
-    'Participating in community challenges and events',
-    'Providing constructive feedback on peer work',
-    'Sharing learning experiences and insights',
-  ]
-
-  const prohibitedActivities = [
-    'Harassment, bullying, or hate speech',
-    'Sharing malicious software or harmful links',
-    'Commercial advertising or spam',
-    'Impersonation or false identity',
-    'Sharing others personal information without consent',
-    'Copyright infringement or unauthorized sharing',
-    'Any illegal activities or content'
-  ]
-
-  const intellectualProperty = [
+  const dataUsage = [
     {
-      aspect: 'User Content',
-      rights: 'You retain ownership of content you create, but grant UniCollab license to display and distribute it'
+      purpose: 'Platform Operation',
+      description: 'To provide and maintain the UniCollab service'
     },
     {
-      aspect: 'Platform Content',
-      rights: 'UniCollab owns all platform code, design, and proprietary content'
+      purpose: 'Community Features',
+      description: 'To enable collaboration and communication between students'
     },
     {
-      aspect: 'Third-Party Content',
-      rights: 'Respect copyright and attribute third-party materials properly'
+      purpose: 'Personalization',
+      description: 'To customize your learning and collaboration experience'
     },
     {
-      aspect: 'Collaborative Work',
-      rights: 'Joint projects should have clear attribution and usage agreements'
+      purpose: 'Security & Safety',
+      description: 'To protect our community and prevent misuse'
+    },
+    {
+      purpose: 'Improvements',
+      description: 'To analyze usage patterns and enhance our platform'
+    },
+    {
+      purpose: 'Communications',
+      description: 'To send important updates and community announcements'
     }
   ]
 
-  const accountTerms = [
+  const userRights = [
     {
-      term: 'Eligibility',
-      description: 'Must be currently enrolled student or faculty member at Vellore Institute of Technology (VIT)'
+      right: 'Access Your Data',
+      description: 'Request a copy of all personal information we hold about you'
     },
     {
-      term: 'Verification',
-      description: 'May require educational email verification or institutional confirmation'
+      right: 'Data Correction',
+      description: 'Update or correct inaccurate personal information'
     },
     {
-      term: 'Termination',
-      description: 'Accounts may be suspended for violations of Terms Of Services (TOS) or Code Of Conduct (COC)'
+      right: 'Data Deletion',
+      description: 'Request deletion of your personal data under certain conditions'
     },
     {
-      term: 'Data Retention',
-      description: 'Account data retained according to our privacy policy after deactivation'
+      right: 'Account Deactivation',
+      description: 'Temporarily or permanently deactivate your account'
+    },
+    {
+      right: 'Data Portability',
+      description: 'Receive your data in a structured, machine-readable format'
+    },
+    {
+      right: 'Consent Withdrawal',
+      description: 'Withdraw consent for data processing where applicable'
     }
   ]
 
-  const limitations = [
+  const securityMeasures = [
+    'End-to-end encryption for sensitive data',
+    'Regular security audits and vulnerability assessments',
+    'Secure server infrastructure with firewalls',
+    'Access controls and authentication protocols',
+    'Data anonymization where possible',
+    'Regular backup and disaster recovery procedures'
+  ]
+
+  const thirdPartyServices = [
     {
-      limitation: 'Service Availability',
-      description: 'We strive for 24/7 availability but cannot guarantee uninterrupted service'
+      service: 'Authentication Services',
+      purpose: 'Secure user login and account management'
     },
     {
-      limitation: 'Content Accuracy',
-      description: 'We are not responsible for accuracy of user-generated educational content'
+      service: 'Cloud Storage',
+      purpose: 'Safe storage of user data and content'
     },
     {
-      limitation: 'Academic Outcomes',
-      description: 'Success in academic pursuits remains the responsibility of the student'
+      service: 'Analytics Tools',
+      purpose: 'Platform improvement and usage analysis'
     },
     {
-      limitation: 'Third-Party Links',
-      description: 'We are not responsible for content on external websites linked from our platform'
+      service: 'Communication Tools',
+      purpose: 'Email notifications and community updates'
     }
   ]
 
@@ -196,20 +201,20 @@ const TermsOfService = () => {
               whileHover={{ scale: 1.1, rotate: 360 }}
               transition={{ duration: 0.5 }}
             >
-              <Scale className='w-10 h-10 text-primary-foreground' />
+              <Lock className='w-10 h-10 text-primary-foreground' />
             </motion.div>
             <motion.h1
               className='text-4xl md:text-5xl font-black text-textColor mb-4'
               variants={fadeInUp}
             >
-              Terms of Service
+              Privacy Policy
             </motion.h1>
             <motion.p
               className='text-xl text-muted-foreground mb-8 leading-relaxed'
               variants={fadeInUp}
             >
-              Welcome to UniCollab! These Terms govern your use of our collaborative
-              learning platform. Please read them carefully before joining our community.
+              Your privacy is our priority. Learn how UniCollab protects your data
+              and respects your rights while providing the best collaborative learning experience.
             </motion.p>
             <motion.div
               className='flex flex-col sm:flex-row gap-4 justify-center'
@@ -222,7 +227,7 @@ const TermsOfService = () => {
                 </Link>
               </Button>
               <Button asChild variant='outline' size='lg'>
-                <Link to='/privacy'>Privacy Policy</Link>
+                <Link to='/code-of-conduct'>Code of Conduct</Link>
               </Button>
             </motion.div>
           </motion.div>
@@ -245,13 +250,10 @@ const TermsOfService = () => {
               day: 'numeric'
             })}
           </p>
-          <p className='text-xs text-muted-foreground mt-2'>
-            By using UniCollab, you agree to these Terms and our Code of Conduct
-          </p>
         </motion.div>
       </div>
 
-      {/* Agreement Section */}
+      {/* Introduction */}
       <div className='container mx-auto px-6 py-16'>
         <div className='max-w-4xl mx-auto'>
           <motion.div
@@ -263,27 +265,23 @@ const TermsOfService = () => {
             <Card className='hover:shadow-lg transition-all duration-300'>
               <CardHeader>
                 <CardTitle className='flex items-center gap-2'>
-                  <FileText className='w-5 h-5' />
-                  Agreement to Terms
+                  <Shield className='w-5 h-5' />
+                  Our Commitment to Privacy
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className='space-y-4 text-muted-foreground'>
                   <p>
-                    By accessing or using UniCollab, you acknowledge that you have read,
-                    understood, and agree to be bound by these Terms of Service and our
-                    Privacy Policy. If you do not agree with these terms, please do not
+                    At UniCollab, we are committed to protecting your privacy and ensuring
+                    the security of your personal information. This Privacy Policy explains
+                    how we collect, use, disclose, and safeguard your information when you
                     use our platform.
                   </p>
                   <p>
-                    These terms constitute a legal agreement between you and UniCollab
-                    governing your use of our learning platform and services.
+                    By using UniCollab, you consent to the data practices described in this
+                    policy. We encourage you to read this Privacy Policy carefully to
+                    understand our views and practices regarding your personal data.
                   </p>
-                  <div className='bg-muted/50 p-4 rounded-lg'>
-                    <p className='font-semibold text-red-400'>
-                      Important: These terms include limitations of liability and dispute resolution provisions.
-                    </p>
-                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -291,7 +289,7 @@ const TermsOfService = () => {
         </div>
       </div>
 
-      {/* User Responsibilities */}
+      {/* Data Collection */}
       <div className='bg-muted/30 py-16'>
         <div className='container mx-auto px-6'>
           <div className='max-w-6xl mx-auto'>
@@ -303,10 +301,10 @@ const TermsOfService = () => {
               variants={fadeInUp}
             >
               <h2 className='text-3xl font-black text-textColor mb-4'>
-                User Responsibilities
+                Information We Collect
               </h2>
               <p className='text-muted-foreground text-lg'>
-                Your obligations as a member of our academic community
+                We collect information necessary to provide and improve our collaborative learning platform
               </p>
             </motion.div>
             <motion.div
@@ -316,7 +314,7 @@ const TermsOfService = () => {
               viewport={{ once: true, amount: 0.2 }}
               variants={containerVariants}
             >
-              {userResponsibilities.map((responsibility, index) => (
+              {dataCollectionPoints.map((collection, index) => (
                 <motion.div
                   key={index}
                   variants={itemVariants}
@@ -330,11 +328,26 @@ const TermsOfService = () => {
                           whileHover={{ scale: 1.1, rotate: 5 }}
                           transition={{ type: "spring", stiffness: 300 }}
                         >
-                          <responsibility.icon className='w-8 h-8 text-white mt-1' />
+                          <collection.icon className='w-8 h-8 text-white mt-1' />
                         </motion.div>
                         <div className='flex-1'>
-                          <h3 className='font-semibold text-lg mb-2'>{responsibility.title}</h3>
-                          <p className='text-muted-foreground text-sm'>{responsibility.description}</p>
+                          <h3 className='font-semibold text-lg mb-3'>{collection.title}</h3>
+                          <ul className='space-y-2'>
+                            {collection.data.map((item, itemIndex) => (
+                              <motion.li
+                                key={itemIndex}
+                                className='flex items-center gap-2 text-sm text-muted-foreground'
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true }}
+                                variants={fadeInUp}
+                                transition={{ delay: itemIndex * 0.1 }}
+                              >
+                                <CheckCircle className='w-4 h-4 text-green-500 flex-shrink-0' />
+                                {item}
+                              </motion.li>
+                            ))}
+                          </ul>
                         </div>
                       </div>
                     </CardContent>
@@ -346,7 +359,7 @@ const TermsOfService = () => {
         </div>
       </div>
 
-      {/* Allowed Activities */}
+      {/* Data Usage */}
       <div className='container mx-auto px-6 py-16'>
         <div className='max-w-4xl mx-auto'>
           <motion.div
@@ -357,10 +370,10 @@ const TermsOfService = () => {
             variants={fadeInUp}
           >
             <h2 className='text-3xl font-black text-textColor mb-4'>
-              Permitted Activities
+              How We Use Your Information
             </h2>
             <p className='text-muted-foreground text-lg'>
-              How you can use UniCollab to enhance your learning experience
+              Your data helps us create a better learning experience while maintaining your privacy
             </p>
           </motion.div>
           <motion.div
@@ -369,25 +382,28 @@ const TermsOfService = () => {
             viewport={{ once: true }}
             variants={scaleUp}
           >
-            <Card className='hover:shadow-lg transition-all duration-300 border-green-200'>
+            <Card className='hover:shadow-lg transition-all duration-300'>
               <CardContent className='p-6'>
                 <motion.div
-                  className='grid gap-4'
+                  className='grid md:grid-cols-2 gap-6'
                   variants={containerVariants}
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true }}
                 >
-                  {allowedActivities.map((activity, index) => (
+                  {dataUsage.map((usage, index) => (
                     <motion.div
                       key={index}
-                      className='flex items-start gap-3'
+                      className='flex items-start gap-3 p-4 bg-muted/50 rounded-lg'
                       variants={itemVariants}
-                      whileHover={{ x: 10 }}
+                      whileHover={{ scale: 1.02 }}
                       transition={{ type: "spring", stiffness: 300 }}
                     >
-                      <CheckCircle className='w-5 h-5 text-green-500 mt-0.5 flex-shrink-0' />
-                      <span className='text-muted-foreground'>{activity}</span>
+                      <Database className='w-5 h-5 text-white mt-0.5 flex-shrink-0' />
+                      <div>
+                        <h4 className='font-semibold text-textColor'>{usage.purpose}</h4>
+                        <p className='text-muted-foreground text-sm'>{usage.description}</p>
+                      </div>
                     </motion.div>
                   ))}
                 </motion.div>
@@ -397,10 +413,10 @@ const TermsOfService = () => {
         </div>
       </div>
 
-      {/* Prohibited Activities */}
+      {/* User Rights */}
       <div className='bg-muted/30 py-16'>
         <div className='container mx-auto px-6'>
-          <div className='max-w-4xl mx-auto'>
+          <div className='max-w-6xl mx-auto'>
             <motion.div
               className='text-center mb-12'
               initial="hidden"
@@ -409,50 +425,48 @@ const TermsOfService = () => {
               variants={fadeInUp}
             >
               <h2 className='text-3xl font-black text-textColor mb-4'>
-                Prohibited Activities
+                Your Data Rights
               </h2>
               <p className='text-muted-foreground text-lg'>
-                Actions that violate our terms and may result in account suspension
+                You have control over your personal information
               </p>
             </motion.div>
             <motion.div
+              className='grid md:grid-cols-2 lg:grid-cols-3 gap-6'
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
-              variants={scaleUp}
+              viewport={{ once: true, amount: 0.1 }}
+              variants={containerVariants}
             >
-              <Card className='hover:shadow-lg transition-all duration-300 border-red-200'>
-                <CardContent className='p-6'>
-                  <motion.div
-                    className='grid gap-4'
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                  >
-                    {prohibitedActivities.map((activity, index) => (
+              {userRights.map((right, index) => (
+                <motion.div
+                  key={index}
+                  variants={itemVariants}
+                  whileHover={{ y: -5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <Card className='hover:shadow-lg transition-all duration-300 h-full'>
+                    <CardContent className='p-6 text-center'>
                       <motion.div
-                        key={index}
-                        className='flex items-start gap-3'
-                        variants={itemVariants}
-                        whileHover={{ x: 10 }}
+                        whileHover={{ scale: 1.1 }}
                         transition={{ type: "spring", stiffness: 300 }}
                       >
-                        <XCircle className='w-5 h-5 text-red-500 mt-0.5 flex-shrink-0' />
-                        <span className='text-muted-foreground'>{activity}</span>
+                        <Eye className='w-10 h-10 text-white mx-auto mb-4' />
                       </motion.div>
-                    ))}
-                  </motion.div>
-                </CardContent>
-              </Card>
+                      <h3 className='font-semibold text-lg mb-2'>{right.right}</h3>
+                      <p className='text-muted-foreground text-sm'>{right.description}</p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
             </motion.div>
           </div>
         </div>
       </div>
 
-      {/* Intellectual Property */}
+      {/* Security Measures */}
       <div className='container mx-auto px-6 py-16'>
-        <div className='max-w-6xl mx-auto'>
+        <div className='max-w-4xl mx-auto'>
           <motion.div
             className='text-center mb-12'
             initial="hidden"
@@ -461,39 +475,47 @@ const TermsOfService = () => {
             variants={fadeInUp}
           >
             <h2 className='text-3xl font-black text-textColor mb-4'>
-              Intellectual Property Rights
+              Security Measures
             </h2>
             <p className='text-muted-foreground text-lg'>
-              Understanding ownership and usage rights for content on our platform
+              How we protect your data from unauthorized access and breaches
             </p>
           </motion.div>
           <motion.div
-            className='grid md:grid-cols-2 gap-6'
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={containerVariants}
+            viewport={{ once: true }}
+            variants={scaleUp}
           >
-            {intellectualProperty.map((property, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                whileHover={{ y: -5 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <Card className='hover:shadow-lg transition-all duration-300 h-full'>
-                  <CardContent className='p-6'>
-                    <h3 className='font-semibold text-lg mb-3 text-textColor'>{property.aspect}</h3>
-                    <p className='text-muted-foreground text-sm'>{property.rights}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+            <Card className='hover:shadow-lg transition-all duration-300'>
+              <CardContent className='p-6'>
+                <motion.div
+                  className='grid gap-4'
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                >
+                  {securityMeasures.map((measure, index) => (
+                    <motion.div
+                      key={index}
+                      className='flex items-start gap-3'
+                      variants={itemVariants}
+                      whileHover={{ x: 10 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <Shield className='w-5 h-5 text-green-500 mt-0.5 flex-shrink-0' />
+                      <span className='text-muted-foreground'>{measure}</span>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </CardContent>
+            </Card>
           </motion.div>
         </div>
       </div>
 
-      {/* Account Terms */}
+      {/* Third-Party Services */}
       <div className='bg-muted/30 py-16'>
         <div className='container mx-auto px-6'>
           <div className='max-w-4xl mx-auto'>
@@ -505,10 +527,10 @@ const TermsOfService = () => {
               variants={fadeInUp}
             >
               <h2 className='text-3xl font-black text-textColor mb-4'>
-                Account Terms
+                Third-Party Services
               </h2>
               <p className='text-muted-foreground text-lg'>
-                Requirements and conditions for maintaining your UniCollab account
+                Trusted services we use to enhance your experience
               </p>
             </motion.div>
             <motion.div
@@ -520,13 +542,13 @@ const TermsOfService = () => {
               <Card className='hover:shadow-lg transition-all duration-300'>
                 <CardContent className='p-6'>
                   <motion.div
-                    className='space-y-6'
+                    className='space-y-4'
                     variants={containerVariants}
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
                   >
-                    {accountTerms.map((term, index) => (
+                    {thirdPartyServices.map((service, index) => (
                       <motion.div
                         key={index}
                         className='flex items-start gap-4 p-4 bg-background rounded-lg'
@@ -534,10 +556,10 @@ const TermsOfService = () => {
                         whileHover={{ scale: 1.02 }}
                         transition={{ type: "spring", stiffness: 300 }}
                       >
-                        <Lock className='w-5 h-5 text-white mt-0.5 flex-shrink-0' />
-                        <div>
-                          <h4 className='font-semibold text-textColor'>{term.term}</h4>
-                          <p className='text-muted-foreground text-sm'>{term.description}</p>
+                        <Server className='w-5 h-5 text-white mt-0.5 flex-shrink-0' />
+                        <div className='flex-1'>
+                          <h4 className='font-semibold text-textColor'>{service.service}</h4>
+                          <p className='text-muted-foreground text-sm'>{service.purpose}</p>
                         </div>
                       </motion.div>
                     ))}
@@ -549,67 +571,44 @@ const TermsOfService = () => {
         </div>
       </div>
 
-      {/* Limitations */}
+      {/* Contact Information */}
       <div className='container mx-auto px-6 py-16'>
         <div className='max-w-4xl mx-auto'>
-          <motion.div
-            className='text-center mb-12'
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-          >
-            <h2 className='text-3xl font-black text-textColor mb-4'>
-              Limitations & Disclaimers
-            </h2>
-            <p className='text-muted-foreground text-lg'>
-              Important information about service limitations and responsibilities
-            </p>
-          </motion.div>
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={scaleUp}
           >
-            <Card className='hover:shadow-lg transition-all duration-300 border-orange-200'>
+            <Card className='hover:shadow-lg transition-all duration-300 border-blue-200'>
               <CardHeader>
                 <CardTitle className='flex items-center gap-2'>
-                  <AlertTriangle className='w-5 h-5 text-orange-500' />
-                  Important Limitations
+                  <Mail className='w-5 h-5' />
+                  Contact Our Privacy Team
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <motion.div
-                  className='space-y-6'
-                  variants={containerVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                >
-                  {limitations.map((limit, index) => (
-                    <motion.div
-                      key={index}
-                      className='flex items-start gap-4 p-4 bg-muted/50 rounded-lg'
-                      variants={itemVariants}
-                      whileHover={{ scale: 1.02 }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                    >
-                      <AlertTriangle className='w-5 h-5 text-orange-500 mt-0.5 flex-shrink-0' />
-                      <div>
-                        <h4 className='font-semibold text-textColor'>{limit.limitation}</h4>
-                        <p className='text-muted-foreground text-sm'>{limit.description}</p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </motion.div>
+                <div className='space-y-4 text-muted-foreground'>
+                  <p>
+                    If you have any questions about this Privacy Policy, your personal data,
+                    or wish to exercise your rights, please contact our Privacy Team:
+                  </p>
+                  <div className='bg-muted/50 p-4 rounded-lg'>
+                    <p className='font-semibold text-textColor'>Email: privacy@unicollab.edu</p>
+                    <p className='text-sm'>We typically respond within 48 hours.</p>
+                  </div>
+                  <p className='text-sm'>
+                    For data deletion requests or account-related inquiries, please include
+                    your username and university affiliation for faster processing.
+                  </p>
+                </div>
               </CardContent>
             </Card>
           </motion.div>
         </div>
       </div>
 
-      {/* Contact & Modifications */}
+      {/* Policy Updates */}
       <div className='bg-gradient-to-r from-primary/10 to-primary/5 border-t border-border'>
         <div className='container mx-auto px-6 py-16'>
           <motion.div
@@ -623,13 +622,13 @@ const TermsOfService = () => {
               className='text-3xl font-black text-textColor mb-4'
               variants={fadeInUp}
             >
-              Questions & Modifications
+              Policy Updates
             </motion.h2>
             <motion.p
               className='text-muted-foreground text-lg mb-8'
               variants={fadeInUp}
             >
-              We may update these terms to reflect changes in our services or legal requirements
+              We may update this Privacy Policy to reflect changes in our practices or legal requirements.
             </motion.p>
             <motion.div
               className='flex flex-col sm:flex-row gap-4 justify-center'
@@ -640,21 +639,9 @@ const TermsOfService = () => {
                   Read Code of Conduct
                 </Link>
               </Button>
-              <Button asChild variant='outline' size='lg' className='gap-2'>
-                <Link to='/privacy'>
-                  <Mail className='w-4 h-4' />
-                  Contact Legal Team
-                </Link>
+              <Button asChild variant='outline' size='lg'>
+                <Link to='/about'>About Our Community</Link>
               </Button>
-            </motion.div>
-            <motion.div
-              className='mt-8 p-4 bg-background rounded-lg max-w-2xl mx-auto'
-              variants={fadeInUp}
-            >
-              <p className='text-sm text-muted-foreground'>
-                <strong>Notice of Changes:</strong> We will notify users of significant changes to these terms
-                via platform notifications or email. Continued use after changes constitutes acceptance.
-              </p>
             </motion.div>
           </motion.div>
         </div>
@@ -671,8 +658,8 @@ const TermsOfService = () => {
             variants={fadeInUp}
           >
             <p className='text-muted-foreground text-sm'>
-              Thank you for choosing innoVIT for your collaborative learning journey.
-              We're committed to providing a safe, effective platform for academic collaboration.
+              Thank you for trusting innoVIT with your educational journey.
+              We are committed to protecting your privacy while providing an exceptional collaborative learning experience.
             </p>
           </motion.div>
         </div>
@@ -681,4 +668,4 @@ const TermsOfService = () => {
   )
 }
 
-export default TermsOfService
+export default PrivacyPolicy
