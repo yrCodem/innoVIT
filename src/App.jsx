@@ -11,7 +11,8 @@ import axios from 'axios'
 
 import SubjectDetails from './components/SubjectDetails.jsx'
 import Profile from './components/Profile.jsx'
-import AboutCommunity from './components/unicollab/AboutCommunity.jsx' // Import the About Community page
+import AboutCommunity from './components/unicollab/AboutCommunity.jsx'
+import CodeOfConduct from './components/unicollab/CodeOfConduct.jsx' // Add this import
 
 const App = () => {
   const { login, logout, currentUser, isAuthenticated } = useAuth()
@@ -51,8 +52,8 @@ const App = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/unicollab' element={<UniCollab />} />
         <Route path='/profile' element={<Profile />} />
-        <Route path='/about' element={<AboutCommunity />} />{' '}
-        {/* Add About Community route */}
+        <Route path='/about' element={<AboutCommunity />} />
+        <Route path='/code-of-conduct' element={<CodeOfConduct />} /> {/* Add this route */}
         <Route path='/study' element={<Study />}>
           <Route index element={<Default />} />
           <Route path=':subjectCode' element={<SubjectDetails />} />
