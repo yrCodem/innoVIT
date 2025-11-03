@@ -22,7 +22,7 @@ const testimonials = [
     rating: 5,
   },
   {
-    name: 'James Wilson',
+    name: 'Arnav Tripathi',
     role: 'Aspiring Analyst',
     image: 'https://api.multiavatar.com/13.svg',
     alt: 'https://ui-avatars.com/api/?name=James+Wilson',
@@ -31,8 +31,8 @@ const testimonials = [
     rating: 5,
   },
   {
-    name: 'Neha Verma',
-    role: 'Programmer',
+    name: 'Gungun Kumari',
+    role: 'Programmer/Data Analyst',
     image: 'https://api.multiavatar.com/07.svg',
     alt: 'https://ui-avatars.com/api/?name=Neha+Verma',
     quote:
@@ -41,7 +41,7 @@ const testimonials = [
   },
   {
     name: 'Ishi Pathak',
-    role: 'Future Innovator',
+    role: 'Designer/Future Innovator',
     image: 'https://api.multiavatar.com/14.svg',
     alt: 'https://ui-avatars.com/api/?name=Ishi+Pathak',
     quote:
@@ -49,7 +49,7 @@ const testimonials = [
     rating: 4,
   },
   {
-    name: 'Arjun Rao',
+    name: 'Chiranjeev Kalyane',
     role: 'Researcher',
     image: 'https://api.multiavatar.com/15.svg',
     alt: 'https://ui-avatars.com/api/?name=Arjun+Rao',
