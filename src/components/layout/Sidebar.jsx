@@ -116,7 +116,7 @@ const Sidebar = () => {
               </li>
 
               {/* Other Section */}
-              <li className='rounded-sm'>
+              {/* <li className='rounded-sm'>
                 <Link
                   to='/other'
                   className='flex items-center p-2 space-x-3 rounded-md hover:bg-muted/50'
@@ -124,7 +124,7 @@ const Sidebar = () => {
                   <Info className='w-5 h-5 fill-current dark:text-gray-600' />
                   <span>Other</span>
                 </Link>
-              </li>
+              </li> */}
             </ul>
 
             {/* About Section */}
@@ -140,7 +140,7 @@ const Sidebar = () => {
                     <span>About</span>
                   </Link>
                 </li>
-                <li className='rounded-sm'>
+                {/* <li className='rounded-sm'>
                   <Link
                     to='/guides'
                     className='flex items-center p-2 space-x-3 rounded-md hover:bg-muted/50'
@@ -148,7 +148,7 @@ const Sidebar = () => {
                     <BookMarked className='w-4 h-4 fill-current dark:text-gray-600' />
                     <span>Guides</span>
                   </Link>
-                </li>
+                </li> */}
                 <li className='rounded-sm'>
                   <Link
                     to='/code-of-conduct'
