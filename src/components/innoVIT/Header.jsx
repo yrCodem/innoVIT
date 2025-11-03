@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useAuth } from "../utils/AuthContext.jsx";
+import { useAuth } from "../../utils/AuthContext.jsx";
 import { Link } from "react-router-dom";
-import Logo from "../assets/innovit.png";
+import Logo from "../../assets/innovit.png";
 
 const Header = () => {
   const { currentUser, isAuthenticated } = useAuth();

@@ -1,10 +1,10 @@
 import React from "react";
 import Homepage from "./Homepage.jsx";
-import Features from "./Features.jsx";
-import About from "./About.jsx";
+import Features from "./innoVIT/Features.jsx";
+import About from "./innoVIT/About.jsx";
 import Testimonials from "./Testimonials.jsx";
-import FAQ from "./FAQ.jsx";
-import Footer from "./Footer.jsx";
+import FAQ from "./innoVIT/FAQ.jsx";
+import Footer from "./innoVIT/Footer.jsx";
 
 const Hero = () => {
   return (

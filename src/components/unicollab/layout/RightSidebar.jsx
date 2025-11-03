@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card.jsx'
+import { Card, CardContent, CardHeader, CardTitle } from '../../ui/Card'
 import { motion } from 'framer-motion'
 
 export default function RightSidebar() {
