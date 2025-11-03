@@ -126,12 +126,12 @@ const CodeOfConduct = () => {
 
   const unacceptableBehavior = [
     'Harassment, bullying, or intimidation of any kind',
-    'Hate speech, discrimination, or prejudiced comments',
-    'Sharing others\' personal information without consent',
-    'Plagiarism or academic dishonesty',
+    // 'Hate speech, discrimination, or prejudiced comments',
+    'Sharing other\'s personal information without consent',
+    'Plagiarism and copying/uploading fake information',
     'Spamming, trolling, or disruptive behavior',
     'Sexualized language, imagery, or attention',
-    'Personal attacks or derogatory comments',
+    // 'Personal attacks or derogatory comments',
     'Misinformation or intentionally misleading content'
   ]
 
