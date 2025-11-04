@@ -2,12 +2,19 @@ import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 
 const testimonials = [
+  //       {
+  //     name: 'Umair Malik',
+  //     role: 'Computer Science Student/Aspiring Developer',
+  //     image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Umair',    // GOOD API TO USE FOR DYNAMIC AVATARS
+  //     quote:
+  //       'innoVIT has transformed my learning experience! The real-time discussions and quick access to resources make studying so much easier. I feel more connected to my peers and professors.',
+  //     rating: 5,
+  //   },
   {
     name: 'Umair Malik',
     role: 'Computer Science Student/Aspiring Developer',
-    image: 'https://api.multiavatar.com/BinxBond.svg',
-    type: 'image/svg+xml',
-    alt: 'https://ui-avatars.com/api/?name=Umair+Malik',
+    image:
+      'https://ui-avatars.com/api/?name=Umair+Malik&background=FF6B6B&color=fff&size=100',
     quote:
       'innoVIT has transformed my learning experience! The real-time discussions and quick access to resources make studying so much easier. I feel more connected to my peers and professors.',
     rating: 5,
@@ -15,8 +22,8 @@ const testimonials = [
   {
     name: 'Dr. Nitin Kumar Mishra',
     role: 'Professor of Engineering',
-    image: 'https://api.multiavatar.com/06.svg',
-    alt: 'https://ui-avatars.com/api/?name=Nitin+Kumar+Mishra',
+    image:
+      'https://ui-avatars.com/api/?name=Nitin+Kumar+Mishra&background=4ECDC4&color=fff&size=100',
     quote:
       'As a faculty member, I’ve seen how innoVIT has improved student collaboration and participation in academic discussions. It’s an essential tool for both teaching and learning.',
     rating: 5,
@@ -24,8 +31,8 @@ const testimonials = [
   {
     name: 'Arnav Tripathi',
     role: 'Aspiring Analyst',
-    image: 'https://api.multiavatar.com/13.svg',
-    alt: 'https://ui-avatars.com/api/?name=James+Wilson',
+    image:
+      'https://ui-avatars.com/api/?name=Arnav+Tripathi&background=45B7D1&color=fff&size=100',
     quote:
       "innoVIT helped me connect with peers and experts alike, offering fresh perspectives that boosted my career post-graduation. It's not just a platform, it's a community!",
     rating: 5,
@@ -33,8 +40,8 @@ const testimonials = [
   {
     name: 'Gungun Kumari',
     role: 'Programmer/Data Analyst',
-    image: 'https://api.multiavatar.com/07.svg',
-    alt: 'https://ui-avatars.com/api/?name=Neha+Verma',
+    image:
+      'https://ui-avatars.com/api/?name=Gungun+Kumari&background=96CEB4&color=fff&size=100',
     quote:
       "I love how innoVIT fosters creativity and collaboration. It's the ideal place to explore new ideas, share knowledge, and stay ahead in my field.",
     rating: 5,
@@ -42,8 +49,8 @@ const testimonials = [
   {
     name: 'Ishi Pathak',
     role: 'Designer/Future Innovator',
-    image: 'https://api.multiavatar.com/14.svg',
-    alt: 'https://ui-avatars.com/api/?name=Ishi+Pathak',
+    image:
+      'https://ui-avatars.com/api/?name=Ishi+Pathak&background=FFEAA7&color=000&size=100',
     quote:
       'With innoVIT, my studies have become more interactive. The instant help and discussions from students and faculty alike have made all the difference in my academic growth',
     rating: 4,
@@ -51,8 +58,8 @@ const testimonials = [
   {
     name: 'Chiranjeev Kalyane',
     role: 'Researcher',
-    image: 'https://api.multiavatar.com/15.svg',
-    alt: 'https://ui-avatars.com/api/?name=Arjun+Rao',
+    image:
+      'https://ui-avatars.com/api/?name=Chiranjeev+Kalyane&background=DDA0DD&color=fff&size=100',
     quote:
       'This platform inspires creativity! I can ask unusual questions and get innovative answers from my peers. Love it!',
     rating: 4,
