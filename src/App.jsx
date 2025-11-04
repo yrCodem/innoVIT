@@ -88,14 +88,16 @@ import TermsOfService from './components/unicollab/about-platform/TermsOfService
 const App = () => {
   const { login, logout, currentUser, isAuthenticated } = useAuth()
 
-  const API_URL =
-    import.meta.env.VITE_NODE_ENV === 'production'
-      ? 'https://innovit-backend.onrender.com'
-      : 'http://localhost:5000'
+  // FIXED: Use VITE_API_URL environment variable
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
 
   useEffect(() => {
     const validateToken = async () => {
       try {
+        console.log(
+          'Validating token with URL:',
+          `${API_URL}/api/auth/validate-token`,
+        )
         const response = await axios.get(`${API_URL}/api/auth/validate-token`, {
           withCredentials: true,
         })
@@ -108,6 +110,7 @@ const App = () => {
         }
       } catch (error) {
         console.error('Error validating token', error.message)
+        // Don't logout on network errors, just keep current state
       }
     }
 
