@@ -17,10 +17,13 @@ const AuthPage = () => {
     }
   }, [])
 
+  //   const API_URL =
+  //     import.meta.env.VITE_NODE_ENV === 'production'
+  //       ? 'https://innovit-backend.onrender.com'
+  //       : 'http://localhost:5000'
+
   const API_URL =
-    import.meta.env.VITE_NODE_ENV === 'production'
-      ? 'https://innovit-backend.onrender.com'
-      : 'http://localhost:5000'
+    import.meta.env.VITE_API_URL || 'https://innovit-backend.onrender.com'
 
   const initialValues = {
     firstName: '',

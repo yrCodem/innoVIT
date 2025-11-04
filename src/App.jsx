@@ -89,7 +89,10 @@ const App = () => {
   const { login, logout, currentUser, isAuthenticated } = useAuth()
 
   // FIXED: Use VITE_API_URL environment variable
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+  //   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+
+  const API_URL =
+    import.meta.env.VITE_API_URL || 'https://innovit-backend.onrender.com'
 
   useEffect(() => {
     const validateToken = async () => {
