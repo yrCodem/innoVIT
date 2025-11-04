@@ -19,7 +19,7 @@ const AuthPage = () => {
 
   const API_URL =
     import.meta.env.VITE_NODE_ENV === 'production'
-      ? 'https://innovit-server.onrender.com'
+      ? 'https://innovit-backend.onrender.com'
       : 'http://localhost:5000'
 
   const initialValues = {
