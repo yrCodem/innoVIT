@@ -23,6 +23,7 @@ const corsOptions = {
       'https://innovit-4naq.onrender.com',
       'http://localhost:5173',
       'http://localhost:3000',
+      'http://localhost:5000'
     ]
 
     if (allowedOrigins.indexOf(origin) !== -1) {
