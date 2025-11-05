@@ -102,7 +102,7 @@ const App = () => {
           `${API_URL}/api/auth/validate-token`,
         )
         const response = await axios.get(`${API_URL}/api/auth/validate-token`, {
-          withCredentials: true,
+        //   withCredentials: true,
         })
 
         if (response.data.valid) {

@@ -3,22 +3,20 @@ const router = express.Router();
 const User = require("../models/Users");
 const jwt = require("jsonwebtoken");
 
-// Make sure JWT_SECRET is available
-if (!process.env.JWT_SECRET) {
-  console.error("❌ JWT_SECRET is not set in environment variables");
-}
-
 router.post("/signup", async (req, res) => {
   const { firstName, lastName, username, email, password } = req.body;
 
-  try {
-    const existingUser = await User.findOne({ $or: [{ email }, { username }] });
-    if (existingUser) {
-      return res.status(400).json({
-        message: "Email or username already taken. Please use different email or username",
+  const existingUser = await User.findOne({ $or: [{ email }, { username }] });
+  if (existingUser) {
+    return res
+      .status(400)
+      .json({
+        message:
+          "Email or username already taken. please use different email or username",
       });
-    }
+  }
 
+  try {
     const newUser = new User({
       firstName,
       lastName,
@@ -28,26 +26,16 @@ router.post("/signup", async (req, res) => {
     });
     await newUser.save();
 
-    res.status(201).json({ message: "User registered successfully." });
+    res.status(201).json({ message: "User registered successfully. " });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error registering user." });
   }
 });
 
-router.get("/validate-token", async (req, res) => {
-  const token = req.cookies.token;
-  console.log("Validating token...");
-
-  if (!token) {
-    return res.status(200).json({ valid: false, message: "No token provided" });
-  }
-
+router.get("/validate-token", isLoggedIn, async (req, res) => {
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const userId = decoded.userId;
-    const user = await User.findOne({ _id: userId });
-
+    const user = await User.findOne({ _id: req.userId });
     if (!user) {
       return res.status(200).json({ valid: false, message: "User not found" });
     }
@@ -55,8 +43,7 @@ router.get("/validate-token", async (req, res) => {
     const username = user.username;
     return res.status(200).json({ valid: true, username, message: "Verified..." });
   } catch (error) {
-    console.error("Token validation error:", error);
-    return res.status(200).json({ valid: false, message: "Invalid or expired token" });
+    return res.status(200).json({ valid: false, message: "Error validating token" });
   }
 });
 
@@ -76,42 +63,26 @@ router.post("/signin", async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials." });
     }
 
-    // Create token with JWT_SECRET
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
 
-    console.log("Token generated successfully");
-    res
-      .cookie("token", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        path: "/",
-        sameSite: process.env.NODE_ENV === 'production' ? "none" : "lax",
-        maxAge: 3600000, // 1 hour
-      })
-      .status(200)
-      .json({
-        message: "User logged in successfully.",
-        username: user.username,
-      });
+    console.log("Token generated: ", token);
+    res.status(200).json({
+      message: "User logged in successfully. ",
+      username: user.username,
+      token: token // send the token in the response
+    });
   } catch (error) {
     console.error("Error during login:", error);
-    res.status(500).json({ message: "Unable to Login." });
+    res.status(500).json({ message: "Unable to Login.." });
   }
 });
 
 router.post("/logout", (req, res) => {
-  res
-    .cookie("token", "", {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      path: "/",
-      sameSite: process.env.NODE_ENV === 'production' ? "none" : "lax",
-      expires: new Date(0),
-    })
-    .status(200)
-    .json({ message: "Logged out successfully." });
+  // Since we are using tokens, we don't have a cookie to clear.
+  // The frontend will remove the token from localStorage.
+  res.status(200).json({ message: "Logged out successfully." });
 });
 
 module.exports = router;
@@ -122,20 +93,22 @@ module.exports = router;
 // const User = require("../models/Users");
 // const jwt = require("jsonwebtoken");
 
+// // Make sure JWT_SECRET is available
+// if (!process.env.JWT_SECRET) {
+//   console.error("❌ JWT_SECRET is not set in environment variables");
+// }
+
 // router.post("/signup", async (req, res) => {
 //   const { firstName, lastName, username, email, password } = req.body;
 
-//   const existingUser = await User.findOne({ $or: [{ email }, { username }] });
-//   if (existingUser) {
-//     return res
-//       .status(400)
-//       .json({
-//         message:
-//           "email or username already taken. please use different email or username",
-//       });
-//   }
-
 //   try {
+//     const existingUser = await User.findOne({ $or: [{ email }, { username }] });
+//     if (existingUser) {
+//       return res.status(400).json({
+//         message: "Email or username already taken. Please use different email or username",
+//       });
+//     }
+
 //     const newUser = new User({
 //       firstName,
 //       lastName,
@@ -145,7 +118,7 @@ module.exports = router;
 //     });
 //     await newUser.save();
 
-//     res.status(201).json({ message: "User registered successfully. " });
+//     res.status(201).json({ message: "User registered successfully." });
 //   } catch (error) {
 //     console.error(error);
 //     res.status(500).json({ message: "Error registering user." });
@@ -154,7 +127,7 @@ module.exports = router;
 
 // router.get("/validate-token", async (req, res) => {
 //   const token = req.cookies.token;
-//   console.log("validating...");
+//   console.log("Validating token...");
 
 //   if (!token) {
 //     return res.status(200).json({ valid: false, message: "No token provided" });
@@ -164,15 +137,16 @@ module.exports = router;
 //     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 //     const userId = decoded.userId;
 //     const user = await User.findOne({ _id: userId });
-//     const username = user.username;
 
-//     return res
-//       .status(200)
-//       .json({ valid: true, username, message: "Verified..." });
+//     if (!user) {
+//       return res.status(200).json({ valid: false, message: "User not found" });
+//     }
+
+//     const username = user.username;
+//     return res.status(200).json({ valid: true, username, message: "Verified..." });
 //   } catch (error) {
-//     return res
-//       .status(200)
-//       .json({ valid: false, message: "Invalid or expired token" });
+//     console.error("Token validation error:", error);
+//     return res.status(200).json({ valid: false, message: "Invalid or expired token" });
 //   }
 // });
 
@@ -192,28 +166,28 @@ module.exports = router;
 //       return res.status(400).json({ message: "Invalid credentials." });
 //     }
 
+//     // Create token with JWT_SECRET
 //     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
 //       expiresIn: "1h",
 //     });
 
-//     console.log("Token generated: ", token);
+//     console.log("Token generated successfully");
 //     res
 //       .cookie("token", token, {
 //         httpOnly: true,
 //         secure: process.env.NODE_ENV === 'production',
 //         path: "/",
 //         sameSite: process.env.NODE_ENV === 'production' ? "none" : "lax",
-//         maxAge: 3600000,
+//         maxAge: 3600000, // 1 hour
 //       })
-
 //       .status(200)
 //       .json({
-//         message: "User logged in successfully. ",
+//         message: "User logged in successfully.",
 //         username: user.username,
 //       });
 //   } catch (error) {
 //     console.error("Error during login:", error);
-//     res.status(500).json({ message: "Unable to Login.." });
+//     res.status(500).json({ message: "Unable to Login." });
 //   }
 // });
 
@@ -226,8 +200,8 @@ module.exports = router;
 //       sameSite: process.env.NODE_ENV === 'production' ? "none" : "lax",
 //       expires: new Date(0),
 //     })
-
-//   res.status(200).json({ message: "Logged out successfully." });
+//     .status(200)
+//     .json({ message: "Logged out successfully." });
 // });
 
 // module.exports = router;

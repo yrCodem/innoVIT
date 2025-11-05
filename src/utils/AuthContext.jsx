@@ -15,11 +15,19 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("currentUser", JSON.stringify(userData));
   };
 
-  const logout = () => {
-    setCurrentUser(null);
-    setIsAuthenticated(false);
-    localStorage.removeItem("currentUser");
-  };
+const logout = () => {
+  setCurrentUser(null);
+  setIsAuthenticated(false);
+  localStorage.removeItem('currentUser');
+  localStorage.removeItem('isAuthenticated');
+  localStorage.removeItem('token');
+};
+
+//   const logout = () => {
+//     setCurrentUser(null);
+//     setIsAuthenticated(false);
+//     localStorage.removeItem("currentUser");
+//   };
 
   const value = {
     currentUser,

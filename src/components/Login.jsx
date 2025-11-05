@@ -54,7 +54,7 @@ const AuthPage = () => {
       .required('Password is required'),
   })
 
-  const handleSubmit = async values => {
+const handleSubmit = async values => {
     try {
       const url = isSignUp
         ? `${API_URL}/api/auth/signup`
@@ -64,9 +64,20 @@ const AuthPage = () => {
 
       if (!isSignUp) {
         toast.success(response.data.message)
+
+        // Store authentication data for persistence
+        localStorage.setItem('currentUser', JSON.stringify(response.data.username))
+
+        // If your backend returns a token, store it too
+        if (response.data.token) {
+          localStorage.setItem('token', response.data.token)
+        }
+
+        // Pass user data to login function
         login(response.data.username)
         navigate('/')
       } else {
+        toast.success('Account created successfully! Please sign in.')
         setIsSignUp(false)
       }
     } catch (error) {
@@ -74,6 +85,27 @@ const AuthPage = () => {
       toast.error(errorMessage)
     }
   }
+
+//   const handleSubmit = async values => {
+//     try {
+//       const url = isSignUp
+//         ? `${API_URL}/api/auth/signup`
+//         : `${API_URL}/api/auth/signin`
+
+//       const response = await axios.post(url, values, { withCredentials: true })
+
+//       if (!isSignUp) {
+//         toast.success(response.data.message)
+//         login(response.data.username)
+//         navigate('/')
+//       } else {
+//         setIsSignUp(false)
+//       }
+//     } catch (error) {
+//       const errorMessage = error.response?.data?.message || error.message
+//       toast.error(errorMessage)
+//     }
+//   }
 
   return (
     <div className='flex justify-start items-center flex-col h-[87vh] bg-primary relative top-[13vh]'>
