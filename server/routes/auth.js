@@ -1,92 +1,147 @@
-const express = require("express");
-const router = express.Router();
-const User = require("../models/Users");
-const jwt = require("jsonwebtoken");
+const express = require("express")
+const router = express.Router()
+const User = require("../models/Users")
+const jwt = require("jsonwebtoken")
 
+// Signup Route
 router.post("/signup", async (req, res) => {
-  const { firstName, lastName, username, email, password } = req.body;
-
-  const existingUser = await User.findOne({ $or: [{ email }, { username }] });
-  if (existingUser) {
-    return res
-      .status(400)
-      .json({
-        message:
-          "Email or username already taken. please use different email or username",
-      });
-  }
-
   try {
+    const { firstName, lastName, username, email, password } = req.body
+
+    const existingUser = await User.findOne({ $or: [{ email }, { username }] })
+    if (existingUser) {
+      return res.status(400).json({
+        success: false,
+        message: "Email or username already taken. Please use different email or username",
+      })
+    }
+
     const newUser = new User({
       firstName,
       lastName,
       username,
       email,
       password,
-    });
-    await newUser.save();
+    })
+    await newUser.save()
 
-    res.status(201).json({ message: "User registered successfully. " });
+    res.status(201).json({
+      success: true,
+      message: "User registered successfully.",
+    })
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error registering user." });
+    console.error(error)
+    res.status(500).json({
+      success: false,
+      message: "Error registering user.",
+    })
   }
-});
+})
 
-router.get("/validate-token", isLoggedIn, async (req, res) => {
-  try {
-    const user = await User.findOne({ _id: req.userId });
-    if (!user) {
-      return res.status(200).json({ valid: false, message: "User not found" });
-    }
-
-    const username = user.username;
-    return res.status(200).json({ valid: true, username, message: "Verified..." });
-  } catch (error) {
-    return res.status(200).json({ valid: false, message: "Error validating token" });
-  }
-});
-
+// Login Route
 router.post("/signin", async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password } = req.body
 
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email })
     if (!user) {
-      console.log("User not found: ", email);
-      return res.status(400).json({ message: "Invalid Credentials." });
+      console.log("User not found: ", email)
+      return res.status(400).json({
+        success: false,
+        message: "Invalid Credentials.",
+      })
     }
 
-    const isMatch = await user.comparePassword(password);
+    const isMatch = await user.comparePassword(password)
     if (!isMatch) {
-      console.log("Password mismatch");
-      return res.status(400).json({ message: "Invalid credentials." });
+      console.log("Password mismatch")
+      return res.status(400).json({
+        success: false,
+        message: "Invalid credentials.",
+      })
     }
 
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
+      expiresIn: "24h",
+    })
 
-    console.log("Token generated: ", token);
+    console.log("Token generated successfully")
     res.status(200).json({
-      message: "User logged in successfully. ",
-      username: user.username,
-      token: token // send the token in the response
-    });
+      success: true,
+      message: "User logged in successfully.",
+      token: token,
+      user: {
+        id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        username: user.username,
+        email: user.email,
+      },
+    })
   } catch (error) {
-    console.error("Error during login:", error);
-    res.status(500).json({ message: "Unable to Login.." });
+    console.error("Error during login:", error)
+    res.status(500).json({
+      success: false,
+      message: "Unable to login.",
+    })
   }
-});
+})
 
+// Validate Token Route
+router.get("/validate-token", async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return res.status(200).json({
+        success: false,
+        valid: false,
+        message: "No token provided"
+      })
+    }
+
+    const token = authHeader.split(' ')[1]
+    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    const user = await User.findOne({ _id: decoded.userId })
+
+    if (!user) {
+      return res.status(200).json({
+        success: false,
+        valid: false,
+        message: "User not found"
+      })
+    }
+
+    return res.status(200).json({
+      success: true,
+      valid: true,
+      user: {
+        id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        username: user.username,
+        email: user.email,
+      },
+      message: "Token verified successfully"
+    })
+  } catch (error) {
+    console.error("Token validation error:", error)
+    return res.status(200).json({
+      success: false,
+      valid: false,
+      message: "Invalid or expired token"
+    })
+  }
+})
+
+// Logout Route
 router.post("/logout", (req, res) => {
-  // Since we are using tokens, we don't have a cookie to clear.
-  // The frontend will remove the token from localStorage.
-  res.status(200).json({ message: "Logged out successfully." });
-});
+  res.status(200).json({
+    success: true,
+    message: "Logged out successfully."
+  })
+})
 
-module.exports = router;
-
+module.exports = router
 
 // const express = require("express");
 // const router = express.Router();

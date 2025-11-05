@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const connectDB = require('./config/db.js')
+const otpRoutes = require('./routes/otp.js')
 const authRoutes = require('./routes/auth.js')
 const subjectRoute = require('./routes/subjects.js')
 const uniCollabRoute = require('./routes/uniCollab.js')
@@ -31,7 +32,8 @@ const corsOptions = {
       callback(new Error('Not allowed by CORS'))
     }
   },
-//   credentials: true,
+//   origin: 'https://innovit-4naq.onrender.com',
+  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
 }
@@ -61,7 +63,8 @@ app.get('/health', (req, res) => {
     timestamp: new Date().toISOString(),
   })
 })
-
+// OTP
+app.use("/api/otp", otpRoutes);
 const main = async () => {
   try {
     console.log('Connecting to MongoDB...')
