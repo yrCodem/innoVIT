@@ -17,7 +17,7 @@ const Homepage = () => {
           transition={{ duration: 0.8 }}
           className='text-center max-w-4xl mx-auto flex flex-col items-center'
         >
-          <h1 className='text-5xl md:text-7xl font-bold mb-6 leading-tight text-textColor'>
+          <h1 className='text-5xl md:text-7xl font-bold mb-6 leading-tight text-textColor cursor-none'>
             A Collaborative
             <br />
             <span className='gradient-text'>Knowledge-Sharing Platform</span>
