@@ -33,7 +33,7 @@ router.post("/send-otp", async (req, res) => {
       {
         sender: {
           name: "innoVIT",
-          email: process.env.FROM_EMAIL || "noreply@innovit.com"
+          email: process.env.FROM_EMAIL || "innovit.edu@gmail.com"
         },
         to: [
           {
