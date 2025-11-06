@@ -47,19 +47,19 @@ const testimonials = [
     rating: 5,
   },
   {
-    name: 'Ishi Pathak',
+    name: 'Chiranjeev Kalyane',
     role: 'Designer/Future Innovator',
     image:
-      'https://ui-avatars.com/api/?name=Ishi+Pathak&background=FFEAA7&color=000&size=100',
+      'https://ui-avatars.com/api/?name=Chiranjeev+Kalyane&background=FFEAA7&color=000&size=100',
     quote:
       'With innoVIT, my studies have become more interactive. The instant help and discussions from students and faculty alike have made all the difference in my academic growth',
     rating: 4,
   },
   {
-    name: 'Chiranjeev Kalyane',
+    name: 'Ishi Pathak',
     role: 'Researcher',
     image:
-      'https://ui-avatars.com/api/?name=Chiranjeev+Kalyane&background=DDA0DD&color=fff&size=100',
+      'https://ui-avatars.com/api/?name=Ishi+Pathak&background=DDA0DD&color=fff&size=100',
     quote:
       'This platform inspires creativity! I can ask unusual questions and get innovative answers from my peers. Love it!',
     rating: 4,
