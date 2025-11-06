@@ -13,8 +13,11 @@ const Login = () => {
   const { login } = useAuth()
   const navigate = useNavigate()
 
-  const API_URL = import.meta.env.VITE_API_URL || 'https://localhost:5000' || 'https://innovit-backend.onrender.com'
+//   const API_URL = import.meta.env.VITE_API_URL || 'https://localhost:5000' || 'https://innovit-backend.onrender.com'
 
+const API_URL = import.meta.env.MODE === 'development'
+  ? 'http://localhost:5000'
+  : 'https://innovit-backend.onrender.com'
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
