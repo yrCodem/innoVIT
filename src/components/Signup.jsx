@@ -20,7 +20,7 @@ const Signup = () => {
   const [step, setStep] = useState(1) // 1: Form, 2: OTP
 
   const navigate = useNavigate()
-  const API_URL = import.meta.env.VITE_API_URL || 'https://localhost:5000'
+  const API_URL = import.meta.env.VITE_API_URL || 'https://localhost:5000' || 'https://innovit-backend.onrender.com'
 
   const handleChange = (e) => {
     const { name, value } = e.target
