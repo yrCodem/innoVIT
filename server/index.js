@@ -20,7 +20,7 @@ const corsOptions = {
     if (!origin) return callback(null, true)
 
     const allowedOrigins = [
-      'https://innovit-4naq.onrender.com',
+      'https://innovit-0qxd.onrender.com',
       'http://localhost:5173',
       'http://localhost:3000',
       'http://localhost:5000'
