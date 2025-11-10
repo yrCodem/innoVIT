@@ -28,14 +28,14 @@ const API_URL = import.meta.env.MODE === 'development'
         password
       })
 
-      if (response.data.success) {
-        login(response.data.token, response.data.user)
-        toast.success('Logged in successfully!', {
-          position: 'bottom-right',
-          autoClose: 3000,
-        })
-        navigate('/')
-      }
+    if (response.data.success) {
+  login(response.data.token, response.data.user) // Make sure this is the full user object
+  toast.success('Logged in successfully!', {
+    position: 'bottom-right',
+    autoClose: 3000,
+  })
+  navigate('/')
+}
     } catch (err) {
       toast.error(err.response?.data?.message || 'Login failed', {
         position: 'bottom-right',

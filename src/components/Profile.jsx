@@ -13,26 +13,26 @@ import {
   Shield,
   Mail,
   CheckCircle,
-  RefreshCw
+  RefreshCw,
+  AlertCircle
 } from 'lucide-react';
 import { Button } from "../components/ui/Button.jsx";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/Card.jsx";
 import { Input } from "../components/ui/Input.jsx";
 
 const Profile = () => {
-  const { currentUser, logout, isAuthenticated, updateUser } = useAuth();
+  const { user, logout, isAuthenticated, updateUser } = useAuth();
   const navigate = useNavigate();
-  const API_URL =
-    import.meta.env.VITE_NODE_ENV === "production"
-      ? "https://innovit-server.onrender.com"
-      : "http://localhost:5000";
+  const API_URL = import.meta.env.MODE === 'development'
+    ? 'http://localhost:5000'
+    : 'https://innovit-backend.onrender.com';
 
   // State for profile management
   const [isEditing, setIsEditing] = useState(false);
   const [isChangingPassword, setIsChangingPassword] = useState(false);
   const [profileData, setProfileData] = useState({
-    username: currentUser || "",
-    email: "",
+    username: user?.username || "",
+    email: user?.email || "",
     currentPassword: "",
     newPassword: "",
     confirmPassword: "",
@@ -43,9 +43,15 @@ const Profile = () => {
   // Generate random profile picture on component mount
   useEffect(() => {
     generateRandomAvatar();
-    // Simulate fetching user email (replace with actual API call)
-    setProfileData(prev => ({ ...prev, email: "user.reg@vitbhopal.ac.in" }));
-  }, [currentUser]);
+    // Set initial profile data from user context
+    if (user) {
+      setProfileData(prev => ({
+        ...prev,
+        username: user.username || "",
+        email: user.email || "user.reg@vitbhopal.ac.in"
+      }));
+    }
+  }, [user]);
 
   // Generate random avatar like Reddit
   const generateRandomAvatar = () => {
@@ -55,7 +61,7 @@ const Profile = () => {
       '#F8C471', '#82E0AA', '#F1948A', '#85C1E9', '#D7BDE2'
     ];
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
-    const initials = currentUser ? currentUser.charAt(0).toUpperCase() : 'U';
+    const initials = user?.username ? user.username.charAt(0).toUpperCase() : 'U';
 
     // Create SVG avatar
     const svg = `
@@ -107,16 +113,27 @@ const Profile = () => {
 
     setIsLoading(true);
     try {
-      // Simulate API call - replace with actual endpoint
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Call your backend API to update username
+      const response = await axios.put(
+        `${API_URL}/api/auth/update-profile`,
+        { username: profileData.username },
+        {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        }
+      );
 
-      // Update user context
-      updateUser(profileData.username);
+      if (response.data.success) {
+        // Update user context with new username
+        updateUser({ username: profileData.username });
 
-      toast.success("Username updated successfully!");
-      setIsEditing(false);
+        toast.success("Username updated successfully!");
+        setIsEditing(false);
+      }
     } catch (error) {
-      toast.error("Failed to update username");
+      console.error('Update username error:', error);
+      toast.error(error.response?.data?.message || "Failed to update username");
     } finally {
       setIsLoading(false);
     }
@@ -137,19 +154,33 @@ const Profile = () => {
 
     setIsLoading(true);
     try {
-      // Simulate API call - replace with actual endpoint
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Call your backend API to change password
+      const response = await axios.put(
+        `${API_URL}/api/auth/change-password`,
+        {
+          currentPassword: profileData.currentPassword,
+          newPassword: profileData.newPassword
+        },
+        {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        }
+      );
 
-      toast.success("Password updated successfully!");
-      setIsChangingPassword(false);
-      setProfileData(prev => ({
-        ...prev,
-        currentPassword: "",
-        newPassword: "",
-        confirmPassword: ""
-      }));
+      if (response.data.success) {
+        toast.success("Password updated successfully!");
+        setIsChangingPassword(false);
+        setProfileData(prev => ({
+          ...prev,
+          currentPassword: "",
+          newPassword: "",
+          confirmPassword: ""
+        }));
+      }
     } catch (error) {
-      toast.error("Failed to update password");
+      console.error('Change password error:', error);
+      toast.error(error.response?.data?.message || "Failed to update password");
     } finally {
       setIsLoading(false);
     }
@@ -208,12 +239,17 @@ const Profile = () => {
               </div>
               <div>
                 <h1 className="text-3xl font-black text-textColor">
-                  {currentUser}
+                  {user?.username || "User"}
                 </h1>
                 <p className="text-muted-foreground flex items-center gap-2 mt-1">
                   <Mail className="w-4 h-4" />
-                  {profileData.email}
+                  {user?.email || profileData.email}
                 </p>
+                {/* Privacy Disclaimer */}
+                <div className="flex items-center gap-2 mt-2 text-xs text-amber-600 bg-amber-50 px-3 py-1 rounded-full w-fit">
+                  <AlertCircle className="w-3 h-3" />
+                  <span>For privacy, avoid using your real name as username</span>
+                </div>
               </div>
             </div>
             <Button
@@ -243,7 +279,12 @@ const Profile = () => {
               {/* Username Update Section */}
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-semibold">Username</h3>
+                  <div>
+                    <h3 className="font-semibold">Username</h3>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      This is your public display name
+                    </p>
+                  </div>
                   {!isEditing ? (
                     <Button
                       variant="outline"
@@ -265,7 +306,7 @@ const Profile = () => {
 
                 {!isEditing ? (
                   <p className="text-lg font-medium text-textColor p-3 bg-muted rounded-lg">
-                    {currentUser}
+                    {user?.username || "No username set"}
                   </p>
                 ) : (
                   <form onSubmit={handleUsernameUpdate} className="space-y-3">
@@ -309,7 +350,7 @@ const Profile = () => {
                   Email Address
                 </h3>
                 <p className="text-muted-foreground p-3 bg-muted rounded-lg">
-                  {profileData.email}
+                  {user?.email || profileData.email}
                 </p>
                 <p className="text-xs text-muted-foreground">
                   University email cannot be changed
@@ -362,7 +403,7 @@ const Profile = () => {
                       value={profileData.currentPassword}
                       onChange={handleInputChange}
                       placeholder="Current password"
-                      className="w-full text-black"
+                      className="w-full"
                       required
                     />
                     <Input
@@ -371,7 +412,7 @@ const Profile = () => {
                       value={profileData.newPassword}
                       onChange={handleInputChange}
                       placeholder="New password"
-                      className="w-full text-black"
+                      className="w-full"
                       required
                     />
                     <Input
@@ -380,7 +421,7 @@ const Profile = () => {
                       value={profileData.confirmPassword}
                       onChange={handleInputChange}
                       placeholder="Confirm new password"
-                      className="w-full text-black"
+                      className="w-full"
                       required
                     />
                     <div className="flex gap-2">

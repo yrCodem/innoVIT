@@ -1,4 +1,3 @@
-// src/utils/AuthContext.jsx
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import { jwtDecode } from 'jwt-decode'
 
@@ -40,6 +39,15 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false)
     localStorage.removeItem('token')
     localStorage.removeItem('user')
+  }
+
+  const updateUser = (updatedUserData) => {
+    setUser(prev => ({ ...prev, ...updatedUserData }))
+    const savedUser = localStorage.getItem('user')
+    if (savedUser) {
+      const userObj = JSON.parse(savedUser)
+      localStorage.setItem('user', JSON.stringify({ ...userObj, ...updatedUserData }))
+    }
   }
 
   const getUserEmail = () => {
@@ -85,6 +93,7 @@ export const AuthProvider = ({ children }) => {
         loading,
         login,
         logout,
+        updateUser,
         getUserEmail,
         getUsername,
       }}
