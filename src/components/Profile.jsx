@@ -14,14 +14,16 @@ import {
   Mail,
   CheckCircle,
   RefreshCw,
-  AlertCircle
+  AlertCircle,
+  HelpCircle,
+  Loader2
 } from 'lucide-react';
 import { Button } from "../components/ui/Button.jsx";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/Card.jsx";
 import { Input } from "../components/ui/Input.jsx";
 
 const Profile = () => {
-  const { user, logout, isAuthenticated, updateUser } = useAuth();
+  const { user, logout, isAuthenticated, updateUser, loading: authLoading } = useAuth();
   const navigate = useNavigate();
   const API_URL = import.meta.env.MODE === 'development'
     ? 'http://localhost:5000'
@@ -30,28 +32,33 @@ const Profile = () => {
   // State for profile management
   const [isEditing, setIsEditing] = useState(false);
   const [isChangingPassword, setIsChangingPassword] = useState(false);
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const [profileData, setProfileData] = useState({
-    username: user?.username || "",
-    email: user?.email || "",
+    username: "",
+    email: "",
     currentPassword: "",
     newPassword: "",
     confirmPassword: "",
   });
   const [profilePicture, setProfilePicture] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [pageLoading, setPageLoading] = useState(true);
 
-  // Generate random profile picture on component mount
+  // Initialize profile data once auth is loaded and user data is available
   useEffect(() => {
-    generateRandomAvatar();
-    // Set initial profile data from user context
-    if (user) {
-      setProfileData(prev => ({
-        ...prev,
-        username: user.username || "",
-        email: user.email || "user.reg@vitbhopal.ac.in"
-      }));
+    if (!authLoading) {
+      if (user) {
+        setProfileData(prev => ({
+          ...prev,
+          username: user.username || "",
+          email: user.email || "user.reg@vitbhopal.ac.in"
+        }));
+        generateRandomAvatar();
+      }
+      setPageLoading(false);
     }
-  }, [user]);
+  }, [authLoading, user]);
 
   // Generate random avatar like Reddit
   const generateRandomAvatar = () => {
@@ -76,7 +83,14 @@ const Profile = () => {
     setProfilePicture(`data:image/svg+xml;base64,${btoa(svg)}`);
   };
 
-  const handleLogout = async () => {
+  // Handle logout confirmation
+  const handleLogoutClick = () => {
+    setShowLogoutConfirm(true);
+  };
+
+  // Handle confirmed logout
+  const handleConfirmLogout = async () => {
+    setIsLoggingOut(true);
     try {
       const response = await axios.post(
         `${API_URL}/api/auth/logout`,
@@ -88,12 +102,24 @@ const Profile = () => {
 
       if (response.status === 200) {
         logout();
-        toast.success(response.data.message);
+        toast.success(response.data.message || "Logged out successfully!");
         navigate("/login");
       }
     } catch (error) {
-      toast.error("Error during logout.");
+      console.error("Logout error:", error);
+      // Even if API call fails, clear local storage and context
+      logout();
+      toast.success("Logged out successfully!");
+      navigate("/login");
+    } finally {
+      setIsLoggingOut(false);
+      setShowLogoutConfirm(false);
     }
+  };
+
+  // Cancel logout
+  const handleCancelLogout = () => {
+    setShowLogoutConfirm(false);
   };
 
   const handleInputChange = (e) => {
@@ -197,6 +223,18 @@ const Profile = () => {
     }));
   };
 
+  // Show loading screen while auth is initializing
+  if (authLoading || pageLoading) {
+    return (
+      <div className="relative top-[13vh] min-h-[87vh] bg-background flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <Loader2 className="w-8 h-8 animate-spin text-primary" />
+          <p className="text-muted-foreground">Loading profile...</p>
+        </div>
+      </div>
+    );
+  }
+
   if (!isAuthenticated) {
     return (
       <div className="relative top-[13vh] max-h-[87vh] min-h-[87vh] w-[95vw] mx-auto bg-secondary flex items-center justify-center">
@@ -218,6 +256,55 @@ const Profile = () => {
 
   return (
     <div className="relative top-[13vh] min-h-[87vh] bg-background">
+      {/* Logout Confirmation Modal */}
+      {showLogoutConfirm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg max-w-md w-full p-6 shadow-xl">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 bg-red-100 rounded-full">
+                <HelpCircle className="w-6 h-6 text-red-600" />
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900">
+                Confirm Logout
+              </h3>
+            </div>
+
+            <p className="text-gray-600 mb-6">
+              Are you sure you want to log out? You'll need to sign in again to access your account.
+            </p>
+
+            <div className="flex gap-3 justify-end">
+              <Button
+                variant="outline"
+                onClick={handleCancelLogout}
+                disabled={isLoggingOut}
+                className="px-4 py-2 bg-gray-500 hover:bg-gray-800"
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="destructive"
+                onClick={handleConfirmLogout}
+                disabled={isLoggingOut}
+                className="px-4 py-2 flex items-center gap-2 bg-red-400 hover:bg-red-600"
+              >
+                {isLoggingOut ? (
+                  <>
+                    <RefreshCw className="w-4 h-4 animate-spin" />
+                    Logging out...
+                  </>
+                ) : (
+                  <>
+                    <LogOut className="w-4 h-4" />
+                    Logout
+                  </>
+                )}
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Header Section */}
       <div className="bg-secondary border-b border-border">
         <div className="container mx-auto px-6 py-8">
@@ -253,7 +340,7 @@ const Profile = () => {
               </div>
             </div>
             <Button
-              onClick={handleLogout}
+              onClick={handleLogoutClick}
               variant="destructive"
               className="flex items-center gap-2 px-6 py-3"
             >

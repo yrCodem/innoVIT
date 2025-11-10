@@ -1,13 +1,19 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import { jwtDecode } from 'jwt-decode'
+import axios from 'axios'
 
 const AuthContext = createContext()
 
-export const useAuth = () => useContext(AuthContext)
+export const useAuth = () => {
+  const context = useContext(AuthContext)
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider')
+  }
+  return context
+}
 
 const isTokenValid = (token) => {
   if (!token) {
-    console.log('No token provided')
     return null
   }
   try {
@@ -24,6 +30,10 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [loading, setLoading] = useState(true)
+
+  const API_URL = import.meta.env.MODE === 'development'
+    ? 'http://localhost:5000'
+    : 'https://innovit-backend.onrender.com'
 
   const login = (token, userData) => {
     setToken(token)
@@ -42,12 +52,9 @@ export const AuthProvider = ({ children }) => {
   }
 
   const updateUser = (updatedUserData) => {
-    setUser(prev => ({ ...prev, ...updatedUserData }))
-    const savedUser = localStorage.getItem('user')
-    if (savedUser) {
-      const userObj = JSON.parse(savedUser)
-      localStorage.setItem('user', JSON.stringify({ ...userObj, ...updatedUserData }))
-    }
+    const updatedUser = { ...user, ...updatedUserData }
+    setUser(updatedUser)
+    localStorage.setItem('user', JSON.stringify(updatedUser))
   }
 
   const getUserEmail = () => {
@@ -58,30 +65,85 @@ export const AuthProvider = ({ children }) => {
     return user?.username || null
   }
 
+  // Validate token with server
+  const validateTokenWithServer = async (token) => {
+    try {
+      const response = await axios.get(`${API_URL}/api/auth/validate-token`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        timeout: 10000 // 10 second timeout
+      })
+      return response.data
+    } catch (error) {
+      console.error('Server token validation failed:', error)
+      // If server validation fails, fall back to client-side validation
+      const decoded = isTokenValid(token)
+      if (decoded) {
+        const savedUser = localStorage.getItem('user')
+        if (savedUser) {
+          return {
+            success: true,
+            valid: true,
+            user: JSON.parse(savedUser)
+          }
+        }
+      }
+      return { success: false, valid: false }
+    }
+  }
+
   useEffect(() => {
-    const savedToken = localStorage.getItem('token')
-    const savedUser = localStorage.getItem('user')
-    const decoded = isTokenValid(savedToken)
+    const initializeAuth = async () => {
+      try {
+        const savedToken = localStorage.getItem('token')
+        const savedUser = localStorage.getItem('user')
 
-    if (decoded && savedUser) {
-      setToken(savedToken)
-      setUser(JSON.parse(savedUser))
-      setIsAuthenticated(true)
+        if (!savedToken || !savedUser) {
+          setLoading(false)
+          return
+        }
 
-      if (decoded.exp) {
-        const timeout = decoded.exp * 1000 - Date.now()
-        if (timeout > 0) {
-          setTimeout(() => logout(), timeout)
+        // First check if token is valid locally
+        const decoded = isTokenValid(savedToken)
+        if (!decoded) {
+          logout()
+          setLoading(false)
+          return
+        }
+
+        // Then validate with server (with fallback to local validation)
+        const validationResult = await validateTokenWithServer(savedToken)
+
+        if (validationResult.valid && validationResult.user) {
+          setToken(savedToken)
+          setUser(validationResult.user)
+          setIsAuthenticated(true)
+
+          // Set up token expiration timeout
+          if (decoded.exp) {
+            const timeout = decoded.exp * 1000 - Date.now()
+            if (timeout > 0) {
+              setTimeout(() => {
+                console.log('Token expired, auto-logging out...')
+                logout()
+              }, timeout)
+            } else {
+              logout()
+            }
+          }
         } else {
           logout()
         }
+      } catch (error) {
+        console.error('Auth initialization error:', error)
+        logout()
+      } finally {
+        setLoading(false)
       }
-    } else {
-      localStorage.removeItem('token')
-      localStorage.removeItem('user')
     }
 
-    setLoading(false)
+    initializeAuth()
   }, [])
 
   return (
@@ -98,59 +160,7 @@ export const AuthProvider = ({ children }) => {
         getUsername,
       }}
     >
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   )
 }
-// import React, { createContext, useState, useContext, useEffect } from "react";
-
-// const AuthContext = createContext();
-
-// export const useAuth = () => useContext(AuthContext);
-
-// export const AuthProvider = ({ children }) => {
-//   const storedUser = localStorage.getItem("currentUser");
-//   const storedAuthStatus = localStorage.getItem("isAuthenticated");
-
-//   const [currentUser, setCurrentUser] = useState(
-//     storedUser ? JSON.parse(storedUser) : null
-//   );
-//   const [isAuthenticated, setIsAuthenticated] = useState(
-//     storedAuthStatus === "true" // Convert stored string value to boolean
-//   );
-
-//   useEffect(() => {
-//     // Whenever currentUser or isAuthenticated changes, store them in localStorage
-//     if (currentUser && isAuthenticated) {
-//       localStorage.setItem("currentUser", JSON.stringify(currentUser));
-//       localStorage.setItem("isAuthenticated", "true");
-//     } else {
-//       localStorage.removeItem("currentUser");
-//       localStorage.removeItem("isAuthenticated");
-//     }
-//   }, [currentUser, isAuthenticated]);
-
-//   const login = (userData) => {
-//     setCurrentUser(userData);
-//     setIsAuthenticated(true);
-//   };
-
-
-//   const logout = () => {
-//     setCurrentUser(null);
-//     setIsAuthenticated(false);
-//   };
-
-//   const value = {
-//     currentUser,
-//     isAuthenticated,
-//     login,
-//     logout,
-//   };
-
-//   return (
-//     <AuthContext.Provider value={value}>
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// };

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import {
   Home,
@@ -13,13 +13,45 @@ import {
   TrendingUp,
   User,
 } from 'lucide-react'
+import { useAuth } from '../../../utils/AuthContext' // Adjust path based on your project structure
 
 const Sidebar = () => {
   const location = useLocation()
+  const { user, isAuthenticated } = useAuth()
+  const [profilePicture, setProfilePicture] = useState('')
 
   // Check if a link is active
   const isActiveLink = (path) => {
     return location.pathname === path
+  }
+
+  // Generate random avatar similar to Profile.jsx
+  useEffect(() => {
+    if (user?.username) {
+      generateRandomAvatar()
+    }
+  }, [user?.username])
+
+  const generateRandomAvatar = () => {
+    const colors = [
+      '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7',
+      '#DDA0DD', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E9',
+      '#F8C471', '#82E0AA', '#F1948A', '#85C1E9', '#D7BDE2'
+    ]
+    const randomColor = colors[Math.floor(Math.random() * colors.length)]
+    const initials = user?.username ? user.username.charAt(0).toUpperCase() : 'U'
+
+    // Create SVG avatar
+    const svg = `
+      <svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+        <rect width="48" height="48" fill="${randomColor}" rx="24"/>
+        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+              fill="white" font-family="Arial, sans-serif" font-size="20" font-weight="bold">
+          ${initials}
+        </text>
+      </svg>
+    `
+    setProfilePicture(`data:image/svg+xml;base64,${btoa(svg)}`)
   }
 
   return (
@@ -295,18 +327,41 @@ const Sidebar = () => {
         {/* Fixed Profile Section - Always at bottom */}
         <div className='flex-shrink-0 border-t border-gray-200 dark:border-gray-700 mt-auto pt-4'>
           <div className='flex items-center space-x-4'>
-            <div className='w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-semibold'>
-              <User className='w-6 h-6' />
+            <div className='w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-semibold overflow-hidden'>
+              {profilePicture ? (
+                <img
+                  src={profilePicture}
+                  alt="Profile"
+                  className="w-full h-full object-cover"
+                />
+              ) : user?.username ? (
+                <span className="text-sm font-bold">
+                  {user.username.charAt(0).toUpperCase()}
+                </span>
+              ) : (
+                <User className='w-6 h-6' />
+              )}
             </div>
             <div className='flex-1 min-w-0'>
-              <h2 className='text-lg font-semibold truncate'>User Name</h2>
+              <h2 className='text-lg font-semibold truncate'>
+                {isAuthenticated && user?.username ? user.username : 'Guest User'}
+              </h2>
               <span className='flex items-center space-x-1'>
-                <Link
-                  to='/profile'
-                  className='text-xs hover:underline dark:text-gray-600 truncate transition-all duration-200 hover:text-primary'
-                >
-                  View profile
-                </Link>
+                {isAuthenticated ? (
+                  <Link
+                    to='/profile'
+                    className='text-xs hover:underline dark:text-gray-600 truncate transition-all duration-200 hover:text-white'
+                  >
+                    View profile
+                  </Link>
+                ) : (
+                  <Link
+                    to='/login'
+                    className='text-xs hover:underline dark:text-gray-600 truncate transition-all duration-200 hover:text-primary'
+                  >
+                    Sign in
+                  </Link>
+                )}
               </span>
             </div>
           </div>

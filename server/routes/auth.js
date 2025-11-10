@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const User = require("../models/Users")
 const jwt = require("jsonwebtoken")
+const bcrypt = require("bcryptjs")
 
 // Input validation middleware
 const validateSignup = (req, res, next) => {
@@ -43,6 +44,61 @@ const validateSignin = (req, res, next) => {
   }
 
   next()
+}
+
+// Auth middleware to protect routes
+const authenticateToken = async (req, res, next) => {
+  try {
+    const authHeader = req.headers.authorization
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return res.status(401).json({
+        success: false,
+        message: "Access token required"
+      })
+    }
+
+    const token = authHeader.split(' ')[1]
+    if (!token) {
+      return res.status(401).json({
+        success: false,
+        message: "Access token required"
+      })
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    const user = await User.findOne({ _id: decoded.userId }).select('-password')
+
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "User not found"
+      })
+    }
+
+    req.user = user
+    next()
+  } catch (error) {
+    console.error("Authentication error:", error)
+
+    if (error.name === 'JsonWebTokenError') {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid token"
+      })
+    }
+
+    if (error.name === 'TokenExpiredError') {
+      return res.status(401).json({
+        success: false,
+        message: "Token expired"
+      })
+    }
+
+    return res.status(500).json({
+      success: false,
+      message: "Authentication failed"
+    })
+  }
 }
 
 // Signup Route
@@ -215,37 +271,18 @@ router.post("/logout", (req, res) => {
 })
 
 // Get current user profile
-router.get("/profile", async (req, res) => {
+router.get("/profile", authenticateToken, async (req, res) => {
   try {
-    const authHeader = req.headers.authorization
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return res.status(401).json({
-        success: false,
-        message: "Access token required"
-      })
-    }
-
-    const token = authHeader.split(' ')[1]
-    const decoded = jwt.verify(token, process.env.JWT_SECRET)
-    const user = await User.findOne({ _id: decoded.userId }).select('-password')
-
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        message: "User not found"
-      })
-    }
-
     res.status(200).json({
       success: true,
       user: {
-        id: user._id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        username: user.username,
-        email: user.email,
-        createdAt: user.createdAt,
-        updatedAt: user.updatedAt
+        id: req.user._id,
+        firstName: req.user.firstName,
+        lastName: req.user.lastName,
+        username: req.user.username,
+        email: req.user.email,
+        createdAt: req.user.createdAt,
+        updatedAt: req.user.updatedAt
       }
     })
   } catch (error) {
@@ -256,6 +293,124 @@ router.get("/profile", async (req, res) => {
     })
   }
 })
+
+// Update user profile (username)
+router.put("/update-profile", authenticateToken, async (req, res) => {
+  try {
+    const { username } = req.body;
+
+    if (!username || username.trim().length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Username is required"
+      });
+    }
+
+    // Check if username is already taken by another user
+    const existingUser = await User.findOne({
+      username: username.toLowerCase().trim(),
+      _id: { $ne: req.user._id }
+    });
+
+    if (existingUser) {
+      return res.status(409).json({
+        success: false,
+        message: "Username already taken. Please choose a different one."
+      });
+    }
+
+    // Update username
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user._id,
+      { username: username.toLowerCase().trim() },
+      { new: true }
+    ).select('-password');
+
+    res.status(200).json({
+      success: true,
+      message: "Profile updated successfully",
+      user: {
+        id: updatedUser._id,
+        firstName: updatedUser.firstName,
+        lastName: updatedUser.lastName,
+        username: updatedUser.username,
+        email: updatedUser.email,
+      }
+    });
+  } catch (error) {
+    console.error("Update profile error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to update profile"
+    });
+  }
+});
+
+// Change password
+router.put("/change-password", authenticateToken, async (req, res) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+
+    if (!currentPassword || !newPassword) {
+      return res.status(400).json({
+        success: false,
+        message: "Current password and new password are required"
+      });
+    }
+
+    if (newPassword.length < 6) {
+      return res.status(400).json({
+        success: false,
+        message: "New password must be at least 6 characters long"
+      });
+    }
+
+    // Get user with password
+    const user = await User.findById(req.user._id);
+
+    // Verify current password
+    const isCurrentPasswordValid = await user.comparePassword(currentPassword);
+    if (!isCurrentPasswordValid) {
+      return res.status(401).json({
+        success: false,
+        message: "Current password is incorrect"
+      });
+    }
+
+    // Update password
+    user.password = newPassword;
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Password updated successfully"
+    });
+  } catch (error) {
+    console.error("Change password error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to change password"
+    });
+  }
+});
+
+// Delete user account
+router.delete("/delete-account", authenticateToken, async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.user._id);
+
+    res.status(200).json({
+      success: true,
+      message: "Account deleted successfully"
+    });
+  } catch (error) {
+    console.error("Delete account error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to delete account"
+    });
+  }
+});
 
 module.exports = router
 
