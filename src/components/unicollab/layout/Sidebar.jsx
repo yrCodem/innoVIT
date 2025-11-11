@@ -13,7 +13,7 @@ import {
   TrendingUp,
   User,
 } from 'lucide-react'
-import { useAuth } from '../../../utils/AuthContext' // Adjust path based on your project structure
+import { useAuth } from '../../../utils/AuthContext'
 
 const Sidebar = () => {
   const location = useLocation()
@@ -21,7 +21,7 @@ const Sidebar = () => {
   const [profilePicture, setProfilePicture] = useState('')
 
   // Check if a link is active
-  const isActiveLink = (path) => {
+  const isActiveLink = path => {
     return location.pathname === path
   }
 
@@ -34,12 +34,26 @@ const Sidebar = () => {
 
   const generateRandomAvatar = () => {
     const colors = [
-      '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7',
-      '#DDA0DD', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E9',
-      '#F8C471', '#82E0AA', '#F1948A', '#85C1E9', '#D7BDE2'
+      '#FF6B6B',
+      '#4ECDC4',
+      '#45B7D1',
+      '#96CEB4',
+      '#FFEAA7',
+      '#DDA0DD',
+      '#98D8C8',
+      '#F7DC6F',
+      '#BB8FCE',
+      '#85C1E9',
+      '#F8C471',
+      '#82E0AA',
+      '#F1948A',
+      '#85C1E9',
+      '#D7BDE2',
     ]
     const randomColor = colors[Math.floor(Math.random() * colors.length)]
-    const initials = user?.username ? user.username.charAt(0).toUpperCase() : 'U'
+    const initials = user?.username
+      ? user.username.charAt(0).toUpperCase()
+      : 'U'
 
     // Create SVG avatar
     const svg = `
@@ -90,140 +104,176 @@ const Sidebar = () => {
               <span className='font-semibold text-lg'>UniCollab++</span>
 
               {/* Home Section */}
-              <li className={`rounded-sm transition-all duration-200 ${
-                isActiveLink('/unicollab')
-                 ? 'bg-primary/10'
-                  : ''
-              }`}>
+              <li
+                className={`rounded-sm transition-all duration-200 ${
+                  isActiveLink('/unicollab') ? 'bg-primary/10' : ''
+                }`}
+              >
                 <Link
                   to='/unicollab'
                   className='flex items-center p-2 space-x-3 rounded-md transition-all duration-200 group'
                 >
-                  <Home className={`w-5 h-5 transition-all duration-200 ${
-                    isActiveLink('/unicollab')
-                                 ? ''
-                      : 'text-gray-300 group-hover:text-gray-700'
-                  }`} />
-                  <span className={`transition-all duration-200 ${
-                    isActiveLink('/unicollab')
-                     ? 'text-white font-semibold'
-                      : 'group-hover:text-blue-400'
-                  }`}>Home</span>
+                  <Home
+                    className={`w-5 h-5 transition-all duration-200 ${
+                      isActiveLink('/unicollab')
+                        ? ''
+                        : 'text-gray-300 group-hover:text-gray-700'
+                    }`}
+                  />
+                  <span
+                    className={`transition-all duration-200 ${
+                      isActiveLink('/unicollab')
+                        ? 'text-white font-semibold'
+                        : 'group-hover:text-blue-400'
+                    }`}
+                  >
+                    Home
+                  </span>
                 </Link>
               </li>
 
               {/* UniCollab++ Section */}
-              <li className={`rounded-sm transition-all duration-200 ${
-                isActiveLink('/unicollab-plus')
-                  ? 'bg-primary/10'
-                  : ''
-              }`}>
+              <li
+                className={`rounded-sm transition-all duration-200 ${
+                  isActiveLink('/unicollab-plus') ? 'bg-primary/10' : ''
+                }`}
+              >
                 <Link
                   to='/unicollab-plus'
                   className='flex items-center p-2 space-x-3 rounded-md transition-all duration-200 group'
                 >
-                  <Users className={`w-5 h-5 transition-all duration-200 ${
-                    isActiveLink('/unicollab-plus')
-                      ? ''
-                      : 'text-gray-300 group-hover:text-gray-700'
-                  }`} />
-                  <span className={`transition-all duration-200 ${
-                    isActiveLink('/unicollab-plus')
-                      ? 'text-white font-semibold'
-                      : 'group-hover:text-blue-400'
-                  }`}>UniCollab++</span>
+                  <Users
+                    className={`w-5 h-5 transition-all duration-200 ${
+                      isActiveLink('/unicollab-plus')
+                        ? ''
+                        : 'text-gray-300 group-hover:text-gray-700'
+                    }`}
+                  />
+                  <span
+                    className={`transition-all duration-200 ${
+                      isActiveLink('/unicollab-plus')
+                        ? 'text-white font-semibold'
+                        : 'group-hover:text-blue-400'
+                    }`}
+                  >
+                    UniCollab++
+                  </span>
                 </Link>
               </li>
 
               {/* Tags Section */}
-              <li className={`rounded-sm transition-all duration-200 ${
-                isActiveLink('/tags')
-                  ? 'bg-primary/10'
-                  : ''
-              }`}>
+              <li
+                className={`rounded-sm transition-all duration-200 ${
+                  isActiveLink('/tags') ? 'bg-primary/10' : ''
+                }`}
+              >
                 <Link
                   to='/tags'
                   className='flex items-center p-2 space-x-3 rounded-md transition-all duration-200 group'
                 >
-                  <Tag className={`w-5 h-5 transition-all duration-200 ${
-                    isActiveLink('/tags')
+                  <Tag
+                    className={`w-5 h-5 transition-all duration-200 ${
+                      isActiveLink('/tags')
                         ? ''
-                      : 'text-gray-300 group-hover:text-gray-700'
-                  }`} />
-                  <span className={`transition-all duration-200 ${
-                    isActiveLink('/tags')
-                    ? 'text-white font-semibold'
-                      : 'group-hover:text-blue-400'
-                  }`}>Tags</span>
+                        : 'text-gray-300 group-hover:text-gray-700'
+                    }`}
+                  />
+                  <span
+                    className={`transition-all duration-200 ${
+                      isActiveLink('/tags')
+                        ? 'text-white font-semibold'
+                        : 'group-hover:text-blue-400'
+                    }`}
+                  >
+                    Tags
+                  </span>
                 </Link>
               </li>
 
               {/* UniCollab Help Section */}
-              <li className={`rounded-sm transition-all duration-200 ${
-                isActiveLink('/help')
-                  ? 'bg-primary/10'
-                  : ''
-              }`}>
+              <li
+                className={`rounded-sm transition-all duration-200 ${
+                  isActiveLink('/help') ? 'bg-primary/10' : ''
+                }`}
+              >
                 <Link
                   to='/help'
                   className='flex items-center p-2 space-x-3 rounded-md transition-all duration-200 group'
                 >
-                  <HelpCircle className={`w-5 h-5 transition-all duration-200 ${
-                    isActiveLink('/help')
-                             ? ''
-                      : 'text-gray-300 group-hover:text-gray-700'
-                  }`} />
-                  <span className={`transition-all duration-200 ${
-                    isActiveLink('/help')
-                  ? 'text-white font-semibold'
-                      : 'group-hover:text-blue-400'
-                  }`}>UniCollab Help</span>
+                  <HelpCircle
+                    className={`w-5 h-5 transition-all duration-200 ${
+                      isActiveLink('/help')
+                        ? ''
+                        : 'text-gray-300 group-hover:text-gray-700'
+                    }`}
+                  />
+                  <span
+                    className={`transition-all duration-200 ${
+                      isActiveLink('/help')
+                        ? 'text-white font-semibold'
+                        : 'group-hover:text-blue-400'
+                    }`}
+                  >
+                    UniCollab Help
+                  </span>
                 </Link>
               </li>
 
               {/* Challenges Section */}
-              <li className={`rounded-sm transition-all duration-200 ${
-                isActiveLink('/challenges')
-                  ? 'bg-primary/10'
-                  : ''
-              }`}>
+              <li
+                className={`rounded-sm transition-all duration-200 ${
+                  isActiveLink('/challenges') ? 'bg-primary/10' : ''
+                }`}
+              >
                 <Link
                   to='/challenges'
                   className='flex items-center p-2 space-x-3 rounded-md transition-all duration-200 group'
                 >
-                  <Trophy className={`w-5 h-5 transition-all duration-200 ${
-                    isActiveLink('/challenges')
-                                ? ''
-                      : 'text-gray-300 group-hover:text-gray-700'
-                  }`} />
-                  <span className={`transition-all duration-200 ${
-                    isActiveLink('/challenges')
-                       ? 'text-white font-semibold'
-                      : 'group-hover:text-blue-400'
-                  }`}>Challenges</span>
+                  <Trophy
+                    className={`w-5 h-5 transition-all duration-200 ${
+                      isActiveLink('/challenges')
+                        ? ''
+                        : 'text-gray-300 group-hover:text-gray-700'
+                    }`}
+                  />
+                  <span
+                    className={`transition-all duration-200 ${
+                      isActiveLink('/challenges')
+                        ? 'text-white font-semibold'
+                        : 'group-hover:text-blue-400'
+                    }`}
+                  >
+                    Challenges
+                  </span>
                 </Link>
               </li>
 
               {/* UniCollab Blog Section */}
-              <li className={`rounded-sm transition-all duration-200 ${
-                isActiveLink('/blog')
-                  ? 'bg-primary/10'
-                  : ''
-              }`}>
+              <li
+                className={`rounded-sm transition-all duration-200 ${
+                  isActiveLink('/blog') ? 'bg-primary/10' : ''
+                }`}
+              >
                 <Link
                   to='/blog'
                   className='flex items-center p-2 space-x-3 rounded-md transition-all duration-200 group'
                 >
-                  <BookOpen className={`w-5 h-5 transition-all duration-200 ${
-                    isActiveLink('/blog')
-                             ? ''
-                      : 'text-gray-300 group-hover:text-gray-700'
-                  }`} />
-                  <span className={`transition-all duration-200 ${
-                    isActiveLink('/blog')
-                ? 'text-white font-semibold'
-                      : 'group-hover:text-blue-400'
-                  }`}>UniCollab Blog</span>
+                  <BookOpen
+                    className={`w-5 h-5 transition-all duration-200 ${
+                      isActiveLink('/blog')
+                        ? ''
+                        : 'text-gray-300 group-hover:text-gray-700'
+                    }`}
+                  />
+                  <span
+                    className={`transition-all duration-200 ${
+                      isActiveLink('/blog')
+                        ? 'text-white font-semibold'
+                        : 'group-hover:text-blue-400'
+                    }`}
+                  >
+                    UniCollab Blog
+                  </span>
                 </Link>
               </li>
             </ul>
@@ -232,91 +282,115 @@ const Sidebar = () => {
             <div className='mt-6'>
               <h3 className='font-semibold text-lg'>About the Platform</h3>
               <ul className='space-y-1 text-sm'>
-                <li className={`rounded-sm transition-all duration-200 ${
-                  isActiveLink('/about')
-                    ? 'bg-primary/10'
-                    : ''
-                }`}>
+                <li
+                  className={`rounded-sm transition-all duration-200 ${
+                    isActiveLink('/about') ? 'bg-primary/10' : ''
+                  }`}
+                >
                   <Link
                     to='/about'
                     className='flex items-center p-2 space-x-3 rounded-md transition-all duration-200 group'
                   >
-                    <Info className={`w-4 h-4 transition-all duration-200 ${
-                      isActiveLink('/about')
-                               ? ''
-                      : 'text-gray-300 group-hover:text-gray-700'
-                    }`} />
-                    <span className={`transition-all duration-200 ${
-                      isActiveLink('/about')
-                        ? 'text-white font-semibold'
-                      : 'group-hover:text-blue-400'
-                    }`}>About</span>
+                    <Info
+                      className={`w-4 h-4 transition-all duration-200 ${
+                        isActiveLink('/about')
+                          ? ''
+                          : 'text-gray-300 group-hover:text-gray-700'
+                      }`}
+                    />
+                    <span
+                      className={`transition-all duration-200 ${
+                        isActiveLink('/about')
+                          ? 'text-white font-semibold'
+                          : 'group-hover:text-blue-400'
+                      }`}
+                    >
+                      About
+                    </span>
                   </Link>
                 </li>
 
-                <li className={`rounded-sm transition-all duration-200 ${
-                  isActiveLink('/code-of-conduct')
-                    ? 'bg-primary/10'
-                    : ''
-                }`}>
+                <li
+                  className={`rounded-sm transition-all duration-200 ${
+                    isActiveLink('/code-of-conduct') ? 'bg-primary/10' : ''
+                  }`}
+                >
                   <Link
                     to='/code-of-conduct'
                     className='flex items-center p-2 space-x-3 rounded-md transition-all duration-200 group'
                   >
-                    <Shield className={`w-4 h-4 transition-all duration-200 ${
-                      isActiveLink('/code-of-conduct')
-                               ? ''
-                      : 'text-gray-300 group-hover:text-gray-700'
-                    }`} />
-                    <span className={`transition-all duration-200 ${
-                      isActiveLink('/code-of-conduct')
-                         ? 'text-white font-semibold'
-                      : 'group-hover:text-blue-400'
-                    }`}>Code Of Conduct</span>
+                    <Shield
+                      className={`w-4 h-4 transition-all duration-200 ${
+                        isActiveLink('/code-of-conduct')
+                          ? ''
+                          : 'text-gray-300 group-hover:text-gray-700'
+                      }`}
+                    />
+                    <span
+                      className={`transition-all duration-200 ${
+                        isActiveLink('/code-of-conduct')
+                          ? 'text-white font-semibold'
+                          : 'group-hover:text-blue-400'
+                      }`}
+                    >
+                      Code Of Conduct
+                    </span>
                   </Link>
                 </li>
 
-                <li className={`rounded-sm transition-all duration-200 ${
-                  isActiveLink('/privacy')
-                    ? 'bg-primary/10'
-                    : ''
-                }`}>
+                <li
+                  className={`rounded-sm transition-all duration-200 ${
+                    isActiveLink('/privacy') ? 'bg-primary/10' : ''
+                  }`}
+                >
                   <Link
                     to='/privacy'
                     className='flex items-center p-2 space-x-3 rounded-md transition-all duration-200 group'
                   >
-                    <FileText className={`w-4 h-4 transition-all duration-200 ${
-                      isActiveLink('/privacy')
-                                   ? ''
-                      : 'text-gray-300 group-hover:text-gray-700'
-                    }`} />
-                    <span className={`transition-all duration-200 ${
-                      isActiveLink('/privacy')
-                      ? 'text-white font-semibold'
-                      : 'group-hover:text-blue-400'
-                    }`}>Privacy Policy</span>
+                    <FileText
+                      className={`w-4 h-4 transition-all duration-200 ${
+                        isActiveLink('/privacy')
+                          ? ''
+                          : 'text-gray-300 group-hover:text-gray-700'
+                      }`}
+                    />
+                    <span
+                      className={`transition-all duration-200 ${
+                        isActiveLink('/privacy')
+                          ? 'text-white font-semibold'
+                          : 'group-hover:text-blue-400'
+                      }`}
+                    >
+                      Privacy Policy
+                    </span>
                   </Link>
                 </li>
 
-                <li className={`rounded-sm transition-all duration-200 ${
-                  isActiveLink('/terms')
-                    ? 'bg-primary/10'
-                    : ''
-                }`}>
+                <li
+                  className={`rounded-sm transition-all duration-200 ${
+                    isActiveLink('/terms') ? 'bg-primary/10' : ''
+                  }`}
+                >
                   <Link
                     to='/terms'
                     className='flex items-center p-2 space-x-3 rounded-md transition-all duration-200 group'
                   >
-                    <FileText className={`w-4 h-4 transition-all duration-200 ${
-                      isActiveLink('/terms')
-                                  ? ''
-                      : 'text-gray-300 group-hover:text-gray-700'
-                    }`} />
-                    <span className={`transition-all duration-200 ${
-                      isActiveLink('/terms')
-                    ? 'text-white font-semibold'
-                      : 'group-hover:text-blue-400'
-                    }`}>Terms of Service</span>
+                    <FileText
+                      className={`w-4 h-4 transition-all duration-200 ${
+                        isActiveLink('/terms')
+                          ? ''
+                          : 'text-gray-300 group-hover:text-gray-700'
+                      }`}
+                    />
+                    <span
+                      className={`transition-all duration-200 ${
+                        isActiveLink('/terms')
+                          ? 'text-white font-semibold'
+                          : 'group-hover:text-blue-400'
+                      }`}
+                    >
+                      Terms of Service
+                    </span>
                   </Link>
                 </li>
               </ul>
@@ -331,11 +405,11 @@ const Sidebar = () => {
               {profilePicture ? (
                 <img
                   src={profilePicture}
-                  alt="Profile"
-                  className="w-full h-full object-cover"
+                  alt='Profile'
+                  className='w-full h-full object-cover'
                 />
               ) : user?.username ? (
-                <span className="text-sm font-bold">
+                <span className='text-sm font-bold'>
                   {user.username.charAt(0).toUpperCase()}
                 </span>
               ) : (
@@ -344,7 +418,9 @@ const Sidebar = () => {
             </div>
             <div className='flex-1 min-w-0'>
               <h2 className='text-lg font-semibold truncate'>
-                {isAuthenticated && user?.username ? user.username : 'Guest User'}
+                {isAuthenticated && user?.username
+                  ? user.username
+                  : 'Guest User'}
               </h2>
               <span className='flex items-center space-x-1'>
                 {isAuthenticated ? (
