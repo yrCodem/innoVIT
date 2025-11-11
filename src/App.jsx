@@ -22,34 +22,38 @@ const App = () => {
   // Show loading while checking authentication
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-[#080912]">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
+          <p className="mt-4 text-gray-300">Loading...</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div>
+    <div className="relative min-h-screen bg-[#080912]">
+      {/* Header with higher z-index to stay above background */}
       <Header />
 
-      <Routes>
-        <Route path='/' element={<Hero />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<Signup />} />
-        <Route path='/unicollab' element={<UniCollab />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/about' element={<AboutCommunity />} />
-        <Route path='/code-of-conduct' element={<CodeOfConduct />} />
-        <Route path='/privacy' element={<PrivacyPolicy />} />
-        <Route path='/terms' element={<TermsOfService />} />
-        <Route path='/study' element={<Study />}>
-          <Route index element={<Default />} />
-          <Route path=':subjectCode' element={<SubjectDetails />} />
-        </Route>
-      </Routes>
+      {/* Main content area */}
+      <main className="relative z-10">
+        <Routes>
+          <Route path='/' element={<Hero />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/unicollab' element={<UniCollab />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/about' element={<AboutCommunity />} />
+          <Route path='/code-of-conduct' element={<CodeOfConduct />} />
+          <Route path='/privacy' element={<PrivacyPolicy />} />
+          <Route path='/terms' element={<TermsOfService />} />
+          <Route path='/study' element={<Study />}>
+            <Route index element={<Default />} />
+            <Route path=':subjectCode' element={<SubjectDetails />} />
+          </Route>
+        </Routes>
+      </main>
     </div>
   )
 }
