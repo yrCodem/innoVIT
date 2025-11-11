@@ -208,7 +208,7 @@ const UniCollab = () => {
                       <Card className='bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20'>
                         <CardHeader className='flex flex-row items-center gap-4'>
                           <div className='w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center'>
-                            <Home className='w-6 h-6 text-primary' />
+                            <Home className='w-6 h-6 text-white' />
                           </div>
                           <div>
                             <h2 className='text-xl font-semibold'>

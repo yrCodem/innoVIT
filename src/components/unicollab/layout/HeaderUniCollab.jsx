@@ -36,6 +36,5 @@ export default function HeaderUniCollab() {
           </nav> */}
         </div>
       </div>
-    </header>
-  )
+    </header>)
 }

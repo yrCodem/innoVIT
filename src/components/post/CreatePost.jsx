@@ -92,7 +92,7 @@ const CreatePost = ({ onPostCreate }) => {
           >
             <div className="flex items-center gap-3 text-muted-foreground">
               <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                <Plus className="w-5 h-5 text-primary" />
+                <Plus className="w-5 h-5 text-gray-600" />
               </div>
               <span>Create a post...</span>
             </div>

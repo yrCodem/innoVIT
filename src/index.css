@@ -134,7 +134,6 @@ a:focus {
   animation: fadeIn 0.6s ease-out;
 }
 
-/* Glass morphism effect */
 /* Glass morphism effects */
 .glass {
   background: rgba(255, 255, 255, 0.1);
