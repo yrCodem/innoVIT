@@ -25,16 +25,8 @@ export default function HeaderUniCollab() {
             </div>
           </div>
         </div>
-        <div className='flex flex-1 items-center justify-end space-x-4'>
-          {/* <nav className='flex items-center space-x-2'>
-            <Button variant='ghost' asChild>
-              <Link to='/login'>Log in</Link>
-            </Button>
-            <Button asChild>
-              <Link to='/create-account'>Create account</Link>
-            </Button>
-          </nav> */}
-        </div>
+        <div className='flex flex-1 items-center justify-end space-x-4'></div>
       </div>
-    </header>)
+    </header>
+  )
 }
