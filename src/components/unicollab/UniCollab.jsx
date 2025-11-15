@@ -369,7 +369,7 @@ const UniCollab = () => {
           >
             <Link to={'/login'}>
               <div className='font-sora text-xl bg-textColor text-primary font-black p-4 pl-8 pr-8 rounded-full hover:scale-105 transition-transform duration-200'>
-                Sign in
+                Sign in!
               </div>
             </Link>
           </motion.div>
