@@ -12,7 +12,7 @@ export const useAuth = () => {
   return context
 }
 
-const isTokenValid = (token) => {
+const isTokenValid = token => {
   if (!token) {
     return null
   }
@@ -31,9 +31,10 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [loading, setLoading] = useState(true)
 
-  const API_URL = import.meta.env.MODE === 'development'
-    ? 'http://localhost:5000'
-    : 'https://innovit-backend.onrender.com'
+  const API_URL =
+    import.meta.env.MODE === 'development'
+      ? 'http://localhost:5000'
+      : 'https://innovit-backend.onrender.com'
 
   const login = (token, userData) => {
     setToken(token)
@@ -51,7 +52,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('user')
   }
 
-  const updateUser = (updatedUserData) => {
+  const updateUser = updatedUserData => {
     const updatedUser = { ...user, ...updatedUserData }
     setUser(updatedUser)
     localStorage.setItem('user', JSON.stringify(updatedUser))
@@ -66,18 +67,17 @@ export const AuthProvider = ({ children }) => {
   }
 
   // Validate token with server
-  const validateTokenWithServer = async (token) => {
+  const validateTokenWithServer = async token => {
     try {
       const response = await axios.get(`${API_URL}/api/auth/validate-token`, {
         headers: {
-          'Authorization': `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
-        timeout: 10000 // 10 second timeout
+        timeout: 10000, // 10 second timeout
       })
       return response.data
     } catch (error) {
       console.error('Server token validation failed:', error)
-      // If server validation fails, fall back to client-side validation
       const decoded = isTokenValid(token)
       if (decoded) {
         const savedUser = localStorage.getItem('user')
@@ -85,7 +85,7 @@ export const AuthProvider = ({ children }) => {
           return {
             success: true,
             valid: true,
-            user: JSON.parse(savedUser)
+            user: JSON.parse(savedUser),
           }
         }
       }
