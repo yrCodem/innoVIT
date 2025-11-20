@@ -46,17 +46,37 @@ const API_URL = import.meta.env.MODE === 'development'
     if (!formData.firstName.trim()) newErrors.firstName = 'First name is required'
     if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required'
 
-    if (!formData.username.trim()) newErrors.username = 'Username is required'
-    else if (formData.username.length < 3) newErrors.username = 'Username must be at least 3 characters'
+    // if (!formData.username.trim()) newErrors.username = 'Username is required'
+    // else if (formData.username.length < 3) newErrors.username = 'Username must be at least 3 characters'
 
+// Enhanced username validation (from PostIt)
+  if (!formData.username.trim()) {
+    newErrors.username = 'Username is required'
+  } else if (formData.username.length < 6) {
+    newErrors.username = 'Username must be at least 6 characters'
+  } else if (formData.username.length > 30) {
+    newErrors.username = 'Username must be less than 30 characters'
+  } else if (formData.username.includes(' ')) {
+    newErrors.username = 'Username cannot contain spaces'
+  } else if (!/^[a-zA-Z0-9_]+$/.test(formData.username)) {
+    newErrors.username = 'Username can only contain letters, numbers, and underscores'
+  }
     if (!formData.email.trim()) newErrors.email = 'Email is required'
     else if (!/^\S+@\S+\.\S+$/.test(formData.email)) newErrors.email = 'Email is invalid'
 
-    if (!formData.password) newErrors.password = 'Password is required'
-    else if (formData.password.length < 6) newErrors.password = 'Password must be at least 6 characters'
+    // if (!formData.password) newErrors.password = 'Password is required'
+    // else if (formData.password.length < 6) newErrors.password = 'Password must be at least 6 characters'
 
-    if (!formData.confirmPassword) newErrors.confirmPassword = 'Please confirm your password'
-    else if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Passwords do not match'
+    // if (!formData.confirmPassword) newErrors.confirmPassword = 'Please confirm your password'
+    // else if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Passwords do not match'
+
+    // Enhanced password validation (from PostIt)
+  if (!formData.password) newErrors.password = 'Password is required'
+  else if (formData.password.length < 8) newErrors.password = 'Password must be at least 8 characters'
+
+  if (!formData.confirmPassword) newErrors.confirmPassword = 'Please confirm your password'
+  else if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Passwords do not match'
+
 
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
