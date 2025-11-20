@@ -254,7 +254,6 @@ const TermsOfService = () => {
         </div>
       </div>
 
-          {/* Last Updated */}
       <div className='container mx-auto px-6 py-4'>
         <motion.div
           className='max-w-4xl mx-auto text-center'
