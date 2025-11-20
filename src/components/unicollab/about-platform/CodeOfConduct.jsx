@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   Shield,
   Users,
@@ -12,7 +12,8 @@ import {
   Eye,
   MessageCircle,
   Lock,
-  Globe
+  Globe,
+  ArrowLeft
 } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '../../ui/Card'
 import { Button } from '../../ui/Button'
@@ -90,6 +91,12 @@ const fadeInUp = {
 }
 
 const CodeOfConduct = () => {
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
   const principles = [
     {
       icon: Users,
@@ -179,6 +186,24 @@ const CodeOfConduct = () => {
 
   return (
     <div className='relative top-[13vh] min-h-[87vh] bg-background'>
+      {/* Back Button */}
+      <motion.div
+        className="absolute top-4 left-4 z-10"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={handleGoBack}
+          className="flex items-center gap-2 text-textColor hover:text-white hover:bg-white/10 transition-all duration-300"
+        >
+          <ArrowLeft className="w-6 h-4" />
+          {/* Back */}
+        </Button>
+      </motion.div>
+
       {/* Hero Section */}
       <div className='bg-gradient-to-r from-primary/10 to-primary/5 border-b border-border'>
         <div className='container mx-auto px-6 py-16'>
@@ -228,7 +253,7 @@ const CodeOfConduct = () => {
         </div>
       </div>
 
-      {/* Last Updated */}
+  {/* Last Updated */}
       <div className='container mx-auto px-6 py-4'>
         <motion.div
           className='max-w-4xl mx-auto text-center'
